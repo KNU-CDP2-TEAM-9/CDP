@@ -1,9 +1,9 @@
-import classes from "./MainUI.module.css";
-import ChatUI from "./ChatUI";
-import BottomUI from "./BottomUI";
-import SideUI from "./SideUI";
+import classes from "./Contents.module.css";
+import ChatUI from "./Chat";
+import BottomUI from "./Bottom";
+import SideUI from "./Side";
 
-const MainUI = () => {
+const Contents = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
@@ -17,4 +17,4 @@ const MainUI = () => {
   );
 };
 
-export default MainUI;
+export default Contents;

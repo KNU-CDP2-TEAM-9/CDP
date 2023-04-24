@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import classes from "./InputChat.module.css";
+import classes from "./ChatForm.module.css";
 
-const InputChat = (props) => {
+const ChatForm = (props) => {
   const [chatText, setChatText] = useState("");
 
   const chatTextHandler = (event) => {
@@ -39,4 +39,4 @@ const InputChat = (props) => {
   );
 };
 
-export default InputChat;
+export default ChatForm;
