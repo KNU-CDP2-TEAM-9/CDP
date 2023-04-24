@@ -8,9 +8,20 @@ const InputChat = (props) => {
     setChatText(event.target.value);
   };
 
-  const SubmitHandler = (event) => {
+  const SubmitHandler = async (event) => {
     event.preventDefault();
     props.onAdd(chatText);
+    const response = await fetch("http://localhost:8080/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        body: chatText,
+      }),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
     setChatText("");
   };
 
