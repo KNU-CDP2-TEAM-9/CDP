@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import classes from "./ChatUI.module.css";
-import InputChat from "./InputChat";
-const ChatUI = () => {
+import classes from "./Chat.module.css";
+import InputChat from "./ChatForm";
+const Chat = () => {
   const [chatList, setChatList] = useState([]);
   const AddChatToList = (items) => {
     setChatList((prev) => {
@@ -13,7 +13,6 @@ const ChatUI = () => {
     <div className={classes.wrapper}>
       <div className={classes.ulWrapper}>
         <ul className={classes.list}>
-          <li className={classes.item}>sdafd</li>
           {chatList.map((item, index) => {
             return (
               <li className={classes.item} key={index}>
@@ -28,4 +27,4 @@ const ChatUI = () => {
   );
 };
 
-export default ChatUI;
+export default Chat;
