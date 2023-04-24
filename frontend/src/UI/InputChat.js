@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import classes from "./InputChat.module.css";
 
-const InputChat = () => {
+const InputChat = (props) => {
   const [chatText, setChatText] = useState("");
 
   const chatTextHandler = (event) => {
     setChatText(event.target.value);
   };
 
+  const SubmitHandler = (event) => {
+    event.preventDefault();
+    props.onAdd(chatText);
+    setChatText("");
+  };
+
   return (
     <>
-      <input
-        className={classes.Input}
-        type="text"
-        value={chatText}
-        onChange={chatTextHandler}
-      ></input>
+      <form action="#" id="Chatting" onSubmit={SubmitHandler}>
+        <input
+          className={classes.InputChat}
+          type="text"
+          value={chatText}
+          onChange={chatTextHandler}
+        ></input>
+      </form>
     </>
   );
 };
