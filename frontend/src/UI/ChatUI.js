@@ -2,46 +2,28 @@ import React, { useState } from "react";
 import classes from "./ChatUI.module.css";
 import InputChat from "./InputChat";
 const ChatUI = () => {
+  const [chatList, setChatList] = useState([]);
+  const AddChatToList = (items) => {
+    setChatList((prev) => {
+      return [...prev, items];
+    });
+  };
+
   return (
-    <div className={classes.ChatUIWrapper}>
-      <div className={classes.wrapper}>
+    <div className={classes.wrapper}>
+      <div className={classes.ulWrapper}>
         <ul className={classes.list}>
-          <li className={classes.item}>1</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
-          <li>2</li>
+          <li className={classes.item}>sdafd</li>
+          {chatList.map((item, index) => {
+            return (
+              <li className={classes.item} key={index}>
+                {item}
+              </li>
+            );
+          })}
         </ul>
       </div>
-      <InputChat></InputChat>
+      <InputChat onAdd={AddChatToList}></InputChat>
     </div>
   );
 };

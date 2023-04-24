@@ -1,11 +1,11 @@
 .wrapper {
+  position: relative;
+}
+
+.ulWrapper {
   height: 600px;
   background-color: red;
   overflow: auto;
-}
-
-.ChatUIWrapper {
-  position: relative;
 }
 
 .list {
