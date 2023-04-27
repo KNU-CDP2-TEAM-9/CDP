@@ -24,7 +24,7 @@ export async function action({ request }) {
   const response = await fetch("http://localhost:8080/" + mode, {
     method: "POST",
     headers: {
-      "Content-Type": "applcation/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(authData),
   });
