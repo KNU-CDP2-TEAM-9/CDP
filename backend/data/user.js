@@ -1,10 +1,3 @@
-module.exports = {
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "my_db",
-};
-
 const express = require("express");
 const mysql = require("mysql");
 const dbconfig = require("./config/database.js");

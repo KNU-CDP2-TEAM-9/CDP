@@ -2,7 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 
 const chattingRoutes = require("./routes/chat");
-
+const authRoutes = require("./routes/auth");
 const App = express();
 App.use(bodyParser.json());
 
@@ -13,6 +13,7 @@ App.use((req, res, next) => {
   next();
 });
 
+App.use(authRoutes);
 App.use("/chat", chattingRoutes);
 
 App.use((error, req, res, next) => {
