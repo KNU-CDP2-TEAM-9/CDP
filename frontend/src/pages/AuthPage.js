@@ -1,3 +1,4 @@
+import React from "react";
 import { json, redirect } from "react-router-dom";
 import AuthForm from "../component/AuthForm";
 
@@ -38,12 +39,13 @@ export async function action({ request }) {
   }
 
   const resData = await response.json();
-  const token = resData.token;
-  localStorage.setItem("token", token);
-
-  const expiration = new Date();
-  expiration.setHours(expiration.getHours() + 1);
-  localStorage.setItem("expiration", expiration.toISOString());
-
-  return redirect("/main");
+  if (resData.message === "SIGNIN") {
+    return redirect("/");
+  } else if (resData.message === "LOGIN") {
+    const id = resData.id;
+    const token = resData.token;
+    localStorage.setItem("id", id);
+    localStorage.setItem("token", token);
+    return redirect("/main");
+  }
 }

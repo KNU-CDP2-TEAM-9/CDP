@@ -53,7 +53,7 @@ router.post("/signup", async (req, res, next) => {
     const authToken = createJSONToken(newUser.email);
     res
       .status(201)
-      .json({ message: "USER CREATED", user: newUser, token: authToken });
+      .json({ message: "SIGNIN", id: newUser.id, token: authToken });
   } catch (error) {
     next(error);
   }
@@ -68,20 +68,22 @@ router.post("/login", async (req, res, next) => {
     if (error || results.length != 1) {
       return res.status(401).json({ message: "Authentication Failed" });
     }
-    const user = {
+    const curUser = {
       email: results[0].email,
       password: results[0].password,
       id: results[0].id,
     };
-    const pwIsValid = await isValidPassword(password, user.password);
+    const pwIsValid = await isValidPassword(password, curUser.password);
     if (!pwIsValid) {
       return res.status(422).json({
         message: "Invalid credentials.",
         errors: { credentials: "Invalid email or password entered." },
       });
     }
-    const token = createJSONToken(email);
-    res.json({ token });
+    const authToken = createJSONToken(email);
+    res
+      .status(201)
+      .json({ message: "LOGIN", id: curUser.id, token: authToken });
   });
 });
 
