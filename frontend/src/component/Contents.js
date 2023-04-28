@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import classes from "./Contents.module.css";
-import ChatUI from "./Chat";
-import BottomUI from "./Bottom";
-import SideUI from "./Side";
+import Chat from "./Chat";
+import Bottom from "./Bottom";
+import Side from "./Side";
 
 const Contents = () => {
   const [curField, setCurField] = useState(0);
@@ -14,11 +14,11 @@ const Contents = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
-        <ChatUI field={curField} />
-        <BottomUI />
+        <Chat field={curField} />
+        <Bottom />
       </div>
       <div className={classes.secondary}>
-        <SideUI onChangeField={curFieldHandler} />
+        <Side onChangeField={curFieldHandler} />
       </div>
     </div>
   );

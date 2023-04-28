@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Chat.module.css";
-import InputChat from "./ChatForm";
-const Chat = () => {
+import ChatForm from "./ChatForm";
+const Chat = (props) => {
   const [chatList, setChatList] = useState([]);
+
+  useEffect(() => {
+    console.log(props.field);
+  }, [props.field]);
+
   const AddChatToList = (items) => {
     setChatList((prev) => {
       return [...prev, items];
@@ -22,7 +27,7 @@ const Chat = () => {
           })}
         </ul>
       </div>
-      <InputChat onAdd={AddChatToList}></InputChat>
+      <ChatForm field={props.field} onAdd={AddChatToList}></ChatForm>
     </div>
   );
 };
