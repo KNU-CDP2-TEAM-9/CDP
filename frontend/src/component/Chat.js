@@ -5,7 +5,21 @@ const Chat = (props) => {
   const [chatList, setChatList] = useState([]);
 
   useEffect(() => {
-    console.log(props.field);
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    const field = props.field;
+    const fieldInfo = { id: id, field: field };
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:8080/chat/field", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(fieldInfo),
+      });
+    };
+    fetchData();
   }, [props.field]);
 
   const AddChatToList = (items) => {
