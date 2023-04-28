@@ -13,9 +13,11 @@ const ChatForm = (props) => {
     props.onAdd(chatText);
     const id = localStorage.getItem("id");
     const token = localStorage.getItem("token");
+    const field = props.field;
     const chatInfo = {
       message: chatText,
       id: id,
+      field: field,
     };
     const response = await fetch("http://localhost:8080/chat", {
       method: "POST",
@@ -23,12 +25,10 @@ const ChatForm = (props) => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify({
-        body: chatInfo,
-      }),
+      body: JSON.stringify(chatInfo),
     });
-    const responseData = await response.json();
-    console.log(responseData);
+    const resData = await response.json();
+    console.log(resData);
     setChatText("");
   };
 
