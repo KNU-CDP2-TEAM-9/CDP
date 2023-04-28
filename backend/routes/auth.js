@@ -48,7 +48,7 @@ router.post("/signup", async (req, res, next) => {
     const newUser = { id: gid, email: data.email, password: hashedPw };
     const sql = "insert into user set ?";
     connection.query(sql, [newUser], (error, results, fields) => {
-      console.log("INSERT SUCCESS!");
+      console.log("INSERT USER SUCCESS!");
     });
     const authToken = createJSONToken(newUser.email);
     res

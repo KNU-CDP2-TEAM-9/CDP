@@ -14,13 +14,19 @@ router.post("/", async (req, res, next) => {
   const message = data.message;
   const field = data.field;
   const sql = "insert into user_chat set ?";
+  const date = new Date();
   const chat = {
     user_id: id,
     field_index: field,
     chat_message: message,
     isUser: true,
-    chatDate: "",
+    chatDate: date,
   };
+  connection.query(sql, [chat], (error, results, fields) => {
+    if (error) {
+      console.log("INSERT USER_CHAT FAILED!");
+    }
+  });
   res.status(201).json({
     id: chat.user_id,
     field: chat.field_index,
