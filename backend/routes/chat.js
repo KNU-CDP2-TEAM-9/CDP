@@ -34,4 +34,13 @@ router.post("/", async (req, res, next) => {
   });
 });
 
+router.post("/field", (req, res, next) => {
+  const data = req.body;
+  const params = [data.id, data.field];
+  const sql = "select * from user_chat where user_id = ? and field_index = ?";
+  connection.query(sql, params, (error, results, fields) => {
+    console.log(results);
+  });
+});
+
 module.exports = router;
