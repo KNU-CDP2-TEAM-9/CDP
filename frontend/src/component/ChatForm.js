@@ -16,12 +16,12 @@ const ChatForm = (props) => {
     const chatInfo = {
       message: chatText,
       id: id,
-      token: token,
     };
     const response = await fetch("http://localhost:8080/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
         body: chatInfo,

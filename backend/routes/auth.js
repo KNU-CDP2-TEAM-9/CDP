@@ -19,7 +19,7 @@ router.post("/signup", async (req, res, next) => {
     errors.email = "INVALID EMAIL.";
   } else {
     const inputEmail = data.email;
-    const sql = "select * from users where email = ?";
+    const sql = "select * from user where email = ?";
     connection.query(sql, [inputEmail], (error, results, fields) => {
       if (results.length > 0) {
         errors.email = "Email exists already";
@@ -45,8 +45,8 @@ router.post("/signup", async (req, res, next) => {
   try {
     const gid = generateId();
     const hashedPw = await hash(data.password, 12);
-    const newUser = { email: data.email, password: hashedPw, id: gid };
-    const sql = "insert into users set ?";
+    const newUser = { id: gid, email: data.email, password: hashedPw };
+    const sql = "insert into user set ?";
     connection.query(sql, [newUser], (error, results, fields) => {
       console.log("INSERT SUCCESS!");
     });
@@ -63,15 +63,15 @@ router.post("/login", async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  const sql = "select * from users where email = ?";
+  const sql = "select * from user where email = ?";
   connection.query(sql, [email], async (error, results, fields) => {
     if (error || results.length != 1) {
       return res.status(401).json({ message: "Authentication Failed" });
     }
     const curUser = {
+      id: results[0].id,
       email: results[0].email,
       password: results[0].password,
-      id: results[0].id,
     };
     const pwIsValid = await isValidPassword(password, curUser.password);
     if (!pwIsValid) {
