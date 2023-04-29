@@ -39,7 +39,21 @@ router.post("/field", (req, res, next) => {
   const params = [data.id, data.field];
   const sql = "select * from user_chat where user_id = ? and field_index = ?";
   connection.query(sql, params, (error, results, fields) => {
-    console.log(results);
+    if (error) {
+      res.status(422).json({
+        message: "INVALID REQUEST",
+      });
+    } else {
+      const resList = results.map((data) => {
+        return {
+          isUser: data.isUser,
+          message: data.chat_message,
+        };
+      });
+      res.status(201).json({
+        list: resList,
+      });
+    }
   });
 });
 
