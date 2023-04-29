@@ -18,13 +18,16 @@ const Chat = (props) => {
         },
         body: JSON.stringify(fieldInfo),
       });
+      const resData = await response.json();
+      setChatList(resData.list);
     };
     fetchData();
   }, [props.field]);
 
   const AddChatToList = (items) => {
+    const value = { isUser: true, message: items };
     setChatList((prev) => {
-      return [...prev, items];
+      return [...prev, value];
     });
   };
 
@@ -35,7 +38,7 @@ const Chat = (props) => {
           {chatList.map((item, index) => {
             return (
               <li className={classes.item} key={index}>
-                {item}
+                {item.message}
               </li>
             );
           })}
