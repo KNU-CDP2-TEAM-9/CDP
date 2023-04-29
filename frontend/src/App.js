@@ -4,9 +4,9 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
+import InitPage from "./pages/InitPage";
 import { action as authAction } from "./pages/AuthPage";
 import { loader as chatLoader } from "./pages/MainPage";
-import asd from "./pages/newenwewen";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       { path: "auth", element: <AuthPage></AuthPage>, action: authAction },
       {
         path: "/main",
-        element: <asd></asd>,
+        element: <InitPage></InitPage>,
       },
       {
         path: "/main/:id",
