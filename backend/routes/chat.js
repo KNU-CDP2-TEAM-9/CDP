@@ -12,12 +12,12 @@ router.post("/", async (req, res, next) => {
   console.log(data);
   const id = data.id;
   const message = data.message;
-  const field = data.field;
+  const fieldId = data.fieldId;
   const sql = "insert into user_chat set ?";
   const date = new Date();
   const chat = {
     user_id: id,
-    field_index: field,
+    field_index: fieldId,
     chat_message: message,
     isUser: true,
     chatDate: date,
@@ -29,14 +29,14 @@ router.post("/", async (req, res, next) => {
   });
   res.status(201).json({
     id: chat.user_id,
-    field: chat.field_index,
-    msg: chat.chat_message,
+    fieldId: chat.field_index,
+    message: chat.chat_message,
   });
 });
 
-router.post("/field", (req, res, next) => {
+router.post("/:fieldId", (req, res, next) => {
   const data = req.body;
-  const params = [data.id, data.field];
+  const params = [data.id, data.fieldId];
   const sql = "select * from user_chat where user_id = ? and field_index = ?";
   connection.query(sql, params, (error, results, fields) => {
     if (error) {
