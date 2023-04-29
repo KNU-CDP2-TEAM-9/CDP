@@ -5,20 +5,14 @@ import Bottom from "./Bottom";
 import Side from "./Side";
 
 const Contents = () => {
-  const [curField, setCurField] = useState(0);
-
-  const curFieldHandler = (cur) => {
-    setCurField(cur);
-  };
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
-        <Chat field={curField} />
+        <Chat />
         <Bottom />
       </div>
       <div className={classes.secondary}>
-        <Side onChangeField={curFieldHandler} />
+        <Side />
       </div>
     </div>
   );
