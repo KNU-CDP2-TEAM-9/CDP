@@ -6,7 +6,8 @@ import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import { action as authAction } from "./pages/AuthPage";
 import { loader as chatLoader } from "./pages/MainPage";
-import ChatPage from "./pages/ChatPage";
+import asd from "./pages/newenwewen";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,9 +18,8 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "auth", element: <AuthPage></AuthPage>, action: authAction },
       {
-        path: "main",
-        element: <MainPage></MainPage>,
-        loader: chatLoader,
+        path: "/main",
+        element: <asd></asd>,
       },
       {
         path: "/main/:id",

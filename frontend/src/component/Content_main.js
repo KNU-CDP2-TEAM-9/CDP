@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import classes from "./Contents.module.css";
-import Chat from "./Chat";
+import classes from "./Content_main.module.css";
 import Bottom from "./Bottom";
+import chatM from "./hihi";
 import Side from "./Side";
 
-const Contents = (props) => {
+const ContentMain = (props) => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
-        <Chat field={props.field} />
+        <chatM></chatM>
         <Bottom />
       </div>
       <div className={classes.secondary}>
@@ -18,4 +18,4 @@ const Contents = (props) => {
   );
 };
 
-export default Contents;
+export default ContentMain;

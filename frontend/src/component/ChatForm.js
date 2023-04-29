@@ -13,11 +13,11 @@ const ChatForm = (props) => {
     props.onAdd(chatText);
     const id = localStorage.getItem("id");
     const token = localStorage.getItem("token");
-    const field = props.field;
+    const fieldId = props.fieldId;
     const chatInfo = {
       message: chatText,
       id: id,
-      field: field,
+      fieldId: fieldId,
     };
     const response = await fetch("http://localhost:8080/chat", {
       method: "POST",
