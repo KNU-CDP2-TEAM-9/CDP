@@ -1,10 +1,11 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Side.module.css";
 import { useEffect, useState } from "react";
 
 const Side = (props) => {
   const [fieldList, setFieldList] = useState([]);
-
+  console.log("hi");
   useEffect(() => {
     const id = localStorage.getItem("id");
     const token = localStorage.getItem("token");
@@ -49,9 +50,9 @@ const Side = (props) => {
       <ul>
         {fieldList.map((item, index) => {
           return (
-            <Link to={`/main/${item.fieldId}`}>
-              <li key={index}>{item.fieldId}</li>
-            </Link>
+            <li className={classes.item} key={index}>
+              <Link to={`/main/${item.fieldId}`}>{item.fieldId}</Link>
+            </li>
           );
         })}
       </ul>
@@ -59,4 +60,4 @@ const Side = (props) => {
   );
 };
 
-export default Side;
+export default React.memo(Side);

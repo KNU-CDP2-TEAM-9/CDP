@@ -1,12 +1,40 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Chat.module.css";
 import ChatForm from "./ChatForm";
-const Chat = (props) => {
+import { useLocation } from "react-router-dom";
+const Chat = () => {
+  const location = useLocation();
+  const locationList = location.pathname.split("/");
+  const arrLength = locationList.length;
+  const fieldId = locationList[arrLength - 1];
   const [chatList, setChatList] = useState([]);
 
   useEffect(() => {
-    setChatList(props.field.list);
-  }, [props.field]);
+    const loadList = async (fId) => {
+      console.log(fId);
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+      const fieldId = fId;
+      const fieldInfo = { id: id, fieldId: fieldId };
+      const response = await fetch("http://localhost:8080/chat/" + fieldId, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(fieldInfo),
+      });
+      const resData = await response.json();
+      const resList = resData.list.map((data) => {
+        return {
+          isUser: data.isUser,
+          message: data.message,
+        };
+      });
+      setChatList(resList);
+    };
+    loadList(fieldId);
+  }, [location]);
 
   const AddChatToList = (items) => {
     const value = { isUser: true, message: items };
@@ -28,7 +56,7 @@ const Chat = (props) => {
           })}
         </ul>
       </div>
-      <ChatForm fieldId={props.field.fid} onAdd={AddChatToList}></ChatForm>
+      <ChatForm fieldId={fieldId} onAdd={AddChatToList}></ChatForm>
     </div>
   );
 };

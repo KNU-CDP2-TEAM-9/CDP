@@ -18,14 +18,19 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "auth", element: <AuthPage></AuthPage>, action: authAction },
       {
-        path: "/main",
-        element: <InitPage></InitPage>,
-      },
-      {
-        path: "/main/:id",
-        id: "chat-field",
-        element: <MainPage></MainPage>,
-        loader: chatLoader,
+        path: "main",
+        children: [
+          {
+            index: true,
+            id: "chat-default",
+            element: <InitPage is={true}></InitPage>,
+          },
+          {
+            path: ":id",
+            id: "chat-field",
+            element: <InitPage is={false}></InitPage>,
+          },
+        ],
       },
     ],
   },
