@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classes from "./Side.module.css";
+import classes from "../css/Side.module.css";
 import { useEffect, useState } from "react";
 
 const Side = (props) => {

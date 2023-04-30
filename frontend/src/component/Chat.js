@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import classes from "./Chat.module.css";
+import classes from "../css/Chat.module.css";
 import ChatForm from "./ChatForm";
 import { useLocation } from "react-router-dom";
 const Chat = () => {

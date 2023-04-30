@@ -5,8 +5,7 @@ import {
   useActionData,
   useNavigation,
 } from "react-router-dom";
-
-import classes from "./AuthForm.module.css";
+import classes from "../css/AuthForm.module.css";
 
 const AuthForm = () => {
   const data = useActionData();

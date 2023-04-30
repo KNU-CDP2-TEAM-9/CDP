@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Bottom.module.css";
+import classes from "../css/Bottom.module.css";
 
 const Bottom = () => {
   return <div className={classes.wrapper}></div>;
