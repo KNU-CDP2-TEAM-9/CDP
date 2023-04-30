@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import classes from "./Contents.module.css";
-import Chat from "./Chat";
+import React from "react";
+import classes from "../css/Contents.module.css";
+import ChatInit from "./ChatInit";
 import Bottom from "./Bottom";
 import Side from "./Side";
-import ChatInit from "./ChatInit";
+import Chat from "./Chat";
 
 const Contents = (props) => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
-        {props.isDefault ? <ChatInit></ChatInit> : <Chat />}
+        {props.isDefault ? <ChatInit /> : <Chat />}
         <Bottom />
       </div>
       <div className={classes.secondary}>

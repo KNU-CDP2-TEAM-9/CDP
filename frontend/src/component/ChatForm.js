@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./ChatForm.module.css";
+import classes from "../css/ChatForm.module.css";
 
 const ChatForm = (props) => {
   const [chatText, setChatText] = useState("");

@@ -4,9 +4,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
-import InitPage from "./pages/InitPage";
 import { action as authAction } from "./pages/AuthPage";
-import { loader as chatLoader } from "./pages/MainPage";
 
 const router = createBrowserRouter([
   {
@@ -23,12 +21,12 @@ const router = createBrowserRouter([
           {
             index: true,
             id: "chat-default",
-            element: <InitPage is={true}></InitPage>,
+            element: <MainPage isDefault={true}></MainPage>,
           },
           {
             path: ":id",
             id: "chat-field",
-            element: <InitPage is={false}></InitPage>,
+            element: <MainPage isDefault={false}></MainPage>,
           },
         ],
       },
