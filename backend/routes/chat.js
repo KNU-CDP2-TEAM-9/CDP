@@ -1,5 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
+const { v4: generateId } = require("uuid");
 const { checkAuth } = require("../util/auth");
 const router = express.Router();
 const dbconfig = require("../config/database");
@@ -31,6 +32,44 @@ router.post("/", async (req, res, next) => {
     id: chat.user_id,
     fieldId: chat.field_index,
     message: chat.chat_message,
+  });
+});
+
+// 두 번 출력. 수정해애됨
+router.post("/field", (req, res, next) => {
+  const data = req.body;
+  const userId = data.id;
+  const sql = "select * from chat_field where id = ?";
+  connection.query(sql, userId, (error, results, fields) => {
+    if (error) {
+      res.status(422).json({
+        message: "INVALID REQUEST",
+      });
+    } else {
+      const resList = results.map((item) => {
+        return { id: item.id, fieldId: item.fieldId };
+      });
+      res.status(201).json({
+        list: resList,
+      });
+    }
+  });
+});
+
+router.patch("/field", (req, res, next) => {
+  const data = req.body;
+  const userId = data.id;
+  const fieldId = generateId();
+  const sql = "insert into chat_field set ?";
+  const field = { id: userId, fieldId: fieldId };
+  connection.query(sql, [field], (error, results, fields) => {
+    if (error) {
+      console.log("INSERT CHAT_FIELD FAILED!");
+    }
+  });
+  res.status(201).json({
+    id: field.id,
+    fieldId: field.fieldId,
   });
 });
 
