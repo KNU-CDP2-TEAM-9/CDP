@@ -40,7 +40,6 @@ const loadList = async (fId) => {
     body: JSON.stringify(fieldInfo),
   });
   const resData = await response.json();
-  console.log(resData);
   const resList = resData.list.map((data) => {
     return {
       isUser: data.isUser,
