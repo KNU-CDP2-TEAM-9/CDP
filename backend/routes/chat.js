@@ -7,40 +7,39 @@ const { decode } = require("jsonwebtoken");
 
 router.use(checkAuth);
 
-router.post("/", async (req, res, next) => {
+router.post("/msg", async (req, res, next) => {
   const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
-  console.log(data);
-  const id = decode(data.token).id;
-  const message = data.message;
-  const fieldId = data.fieldId;
-  const sql = "insert into user_chat set ?";
-  const date = new Date();
-  const chat = {
-    user_id: id,
-    field_index: fieldId,
-    chat_message: message,
+  const userId = decode(data.token).userId;
+  const text = data.text;
+  const chatId = data.chatId;
+  const sendDate = new Date();
+  const sql = "insert into message set ?";
+  const msg = {
+    userId: userId,
+    chatId: chatId,
+    text: text,
     isUser: true,
-    chatDate: date,
+    sendDate: sendDate,
   };
-  await connection.query(sql, [chat]);
+  await connection.query(sql, [msg]);
   connection.release();
   return res.status(201).json({
-    id: chat.user_id,
-    fieldId: chat.field_index,
-    message: chat.chat_message,
+    userId: msg.userId,
+    chatId: msg.chatId,
+    text: msg.text,
   });
 });
 
 // 두 번 출력. 수정해야됨
-router.post("/field", async (req, res, next) => {
+router.post("/chatList", async (req, res, next) => {
   const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
-  const userId = decode(data.token).id;
-  const sql = "select * from chat_field where id = ?";
-  const [results] = connection.query(sql, [userId]);
+  const userId = decode(data.token).userId;
+  const sql = "select * from chat where userId = ?";
+  const [results] = await connection.query(sql, [userId]);
   const resList = results.map((item) => {
-    return { id: item.id, fieldId: item.fieldId };
+    return { userId: item.userId, chatId: item.chatId };
   });
   connection.release();
   res.status(201).json({
@@ -48,33 +47,34 @@ router.post("/field", async (req, res, next) => {
   });
 });
 
-router.patch("/field", async (req, res, next) => {
+router.patch("/chatAdd", async (req, res, next) => {
   const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
-  const userId = decode(data.token).id;
-  const fieldId = generateId();
-  const sql = "insert into chat_field set ?";
-  const field = { id: userId, fieldId: fieldId };
-  await connection.query(sql, [field]);
+  const userId = decode(data.token).userId;
+  console.log(userId);
+  const chatId = generateId();
+  const sql = "insert into chat set ?";
+  const chat = { userId: userId, chatId: chatId };
+  await connection.query(sql, [chat]);
   connection.release();
 
   return res.status(201).json({
-    id: field.id,
-    fieldId: field.fieldId,
+    userId: chat.userId,
+    chatId: chat.chatId,
   });
 });
 
-router.post("/:fieldId", async (req, res, next) => {
+router.post("/:chatId", async (req, res, next) => {
   const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
-  const id = decode(data.token).id;
-  const params = [id, data.fieldId];
-  const sql = "select * from user_chat where user_id = ? and field_index = ?";
+  const userId = decode(data.token).userId;
+  const params = [userId, data.chatId];
+  const sql = "select * from message where userId = ? and chatId = ?";
   const [results] = await connection.query(sql, params);
   const resList = results.map((data) => {
     return {
       isUser: data.isUser,
-      message: data.chat_message,
+      text: data.text,
     };
   });
   return res.status(201).json({

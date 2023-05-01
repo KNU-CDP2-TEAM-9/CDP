@@ -4,8 +4,8 @@ const { NotAuthError } = require("./errors");
 
 const KEY = "TOPU-SECRE-TTO";
 
-const createJSONToken = (id) => {
-  return sign({ id }, KEY, { expiresIn: "1h" });
+const createJSONToken = (userId) => {
+  return sign({ userId }, KEY, { expiresIn: "1h" });
 };
 
 const validateJSONToken = (token) => {

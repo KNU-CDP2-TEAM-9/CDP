@@ -44,11 +44,11 @@ router.post("/signup", async (req, res, next) => {
   try {
     const gid = generateId();
     const hashedPw = await hash(data.password, 12);
-    const newUser = { id: gid, email: data.email, password: hashedPw };
+    const newUser = { userId: gid, email: data.email, password: hashedPw };
     const sql = "insert into user set ?";
     await connection.query(sql, [newUser]);
     connection.release();
-    const authToken = createJSONToken(newUser.id);
+    const authToken = createJSONToken(newUser.userId);
     return res.status(201).json({ message: "SIGNIN", token: authToken });
   } catch (error) {
     next(error);
@@ -68,7 +68,7 @@ router.post("/login", async (req, res, next) => {
     errors.email = "Invalid Email";
   } else {
     const curUser = {
-      id: results[0].id,
+      userId: results[0].userId,
       email: results[0].email,
       password: results[0].password,
     };
@@ -84,7 +84,7 @@ router.post("/login", async (req, res, next) => {
       errors,
     });
   } else {
-    const authToken = createJSONToken(results[0].id);
+    const authToken = createJSONToken(results[0].userId);
     return res.status(201).json({ message: "LOGIN", token: authToken });
   }
 });
