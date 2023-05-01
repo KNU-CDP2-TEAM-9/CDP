@@ -7,37 +7,37 @@ const Chat = () => {
   const location = useLocation();
   const locationList = location.pathname.split("/");
   const arrLength = locationList.length;
-  const fieldId = locationList[arrLength - 1];
+  const chatId = locationList[arrLength - 1];
   const [chatList, setChatList] = useState([]);
 
   useEffect(() => {
-    const loadList = async (fId) => {
-      console.log(fId);
+    const loadList = async (cId) => {
       const token = localStorage.getItem("token");
-      const fieldId = fId;
-      const fieldInfo = { token: token, fieldId: fieldId };
-      const response = await fetch("http://localhost:8080/chat/" + fieldId, {
+      const chatId = cId;
+      const chatInfo = { token: token, chatId: chatId };
+      const response = await fetch("http://localhost:8080/chat/" + chatId, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
         },
-        body: JSON.stringify(fieldInfo),
+        body: JSON.stringify(chatInfo),
       });
       const resData = await response.json();
       const resList = resData.list.map((data) => {
         return {
           isUser: data.isUser,
-          message: data.message,
+          text: data.text,
         };
       });
+      console.log(resList);
       setChatList(resList);
     };
-    loadList(fieldId);
-  }, [location, fieldId]);
+    loadList(chatId);
+  }, [location, chatId]);
 
   const AddChatToList = (items) => {
-    const value = { isUser: true, message: items };
+    const value = { isUser: true, text: items };
     setChatList((prev) => {
       return [...prev, value];
     });
@@ -50,13 +50,13 @@ const Chat = () => {
           {chatList.map((item, index) => {
             return (
               <li className={classes.item} key={index}>
-                {item.message}
+                {item.text}
               </li>
             );
           })}
         </ul>
       </div>
-      <ChatForm fieldId={fieldId} onAdd={AddChatToList}></ChatForm>
+      <ChatForm chatId={chatId} onAdd={AddChatToList}></ChatForm>
     </div>
   );
 };

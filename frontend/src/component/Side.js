@@ -4,13 +4,12 @@ import classes from "../css/Side.module.css";
 import { useEffect, useState } from "react";
 
 const Side = () => {
-  console.log("hi");
-  const [fieldList, setFieldList] = useState([]);
+  const [chatList, setChatList] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchData = async () => {
       const info = { token: token };
-      const response = await fetch("http://localhost:8080/chat/field", {
+      const response = await fetch("http://localhost:8080/chat/chatList", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,7 +18,7 @@ const Side = () => {
         body: JSON.stringify(info),
       });
       const resData = await response.json();
-      setFieldList(resData.list);
+      setChatList(resData.list);
     };
     fetchData();
   }, []);
@@ -27,7 +26,7 @@ const Side = () => {
   const addNewChatting = async () => {
     const token = localStorage.getItem("token");
     const info = { token: token };
-    const response = await fetch("http://localhost:8080/chat/field", {
+    const response = await fetch("http://localhost:8080/chat/chatAdd", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -36,8 +35,8 @@ const Side = () => {
       body: JSON.stringify(info),
     });
     const resData = await response.json();
-    const value = { id: resData.id, fieldId: resData.fieldId };
-    setFieldList((prev) => {
+    const value = { userId: resData.userId, chatId: resData.chatId };
+    setChatList((prev) => {
       return [...prev, value];
     });
   };
@@ -46,10 +45,10 @@ const Side = () => {
     <div className={classes.wrapper}>
       <button onClick={addNewChatting}>New</button>
       <ul>
-        {fieldList.map((item, index) => {
+        {chatList.map((item, index) => {
           return (
             <li className={classes.item} key={index}>
-              <Link to={`/main/${item.fieldId}`}>{item.fieldId}</Link>
+              <Link to={`/main/${item.chatId}`}>{item.chatId}</Link>
             </li>
           );
         })}

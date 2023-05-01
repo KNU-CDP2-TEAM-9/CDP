@@ -12,11 +12,11 @@ const ChatForm = (props) => {
     props.onAdd(chatText);
     const token = localStorage.getItem("token");
     const chatInfo = {
-      message: chatText,
+      text: chatText,
       token: token,
-      fieldId: props.fieldId,
+      chatId: props.chatId,
     };
-    const response = await fetch("http://localhost:8080/chat", {
+    const response = await fetch("http://localhost:8080/chat/msg", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
