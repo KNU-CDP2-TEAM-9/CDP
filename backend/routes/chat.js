@@ -1,15 +1,14 @@
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("../config/database");
 const { v4: generateId } = require("uuid");
 const { checkAuth } = require("../util/auth");
 const router = express.Router();
-const dbconfig = require("../config/database");
 const { decode } = require("jsonwebtoken");
-const connection = mysql.createConnection(dbconfig);
 
 router.use(checkAuth);
 
 router.post("/", async (req, res, next) => {
+  const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
   console.log(data);
   const id = decode(data.token).id;
@@ -24,77 +23,62 @@ router.post("/", async (req, res, next) => {
     isUser: true,
     chatDate: date,
   };
-  connection.query(sql, [chat], (error, results, fields) => {
-    if (error) {
-      console.log("INSERT USER_CHAT FAILED!");
-    }
-  });
-  res.status(201).json({
+  await connection.query(sql, [chat]);
+  connection.release();
+  return res.status(201).json({
     id: chat.user_id,
     fieldId: chat.field_index,
     message: chat.chat_message,
   });
 });
 
-// 두 번 출력. 수정해애됨
-router.post("/field", (req, res, next) => {
+// 두 번 출력. 수정해야됨
+router.post("/field", async (req, res, next) => {
+  const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
   const userId = decode(data.token).id;
   const sql = "select * from chat_field where id = ?";
-  connection.query(sql, userId, (error, results, fields) => {
-    if (error) {
-      res.status(422).json({
-        message: "INVALID REQUEST",
-      });
-    } else {
-      const resList = results.map((item) => {
-        return { id: item.id, fieldId: item.fieldId };
-      });
-      res.status(201).json({
-        list: resList,
-      });
-    }
+  const [results] = connection.query(sql, [userId]);
+  const resList = results.map((item) => {
+    return { id: item.id, fieldId: item.fieldId };
+  });
+  connection.release();
+  res.status(201).json({
+    list: resList,
   });
 });
 
-router.patch("/field", (req, res, next) => {
+router.patch("/field", async (req, res, next) => {
+  const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
   const userId = decode(data.token).id;
   const fieldId = generateId();
   const sql = "insert into chat_field set ?";
   const field = { id: userId, fieldId: fieldId };
-  connection.query(sql, [field], (error, results, fields) => {
-    if (error) {
-      console.log("INSERT CHAT_FIELD FAILED!");
-    }
-  });
-  res.status(201).json({
+  await connection.query(sql, [field]);
+  connection.release();
+
+  return res.status(201).json({
     id: field.id,
     fieldId: field.fieldId,
   });
 });
 
-router.post("/:fieldId", (req, res, next) => {
+router.post("/:fieldId", async (req, res, next) => {
+  const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
   const id = decode(data.token).id;
   const params = [id, data.fieldId];
   const sql = "select * from user_chat where user_id = ? and field_index = ?";
-  connection.query(sql, params, (error, results, fields) => {
-    if (error) {
-      res.status(422).json({
-        message: "INVALID REQUEST",
-      });
-    } else {
-      const resList = results.map((data) => {
-        return {
-          isUser: data.isUser,
-          message: data.chat_message,
-        };
-      });
-      res.status(201).json({
-        list: resList,
-      });
-    }
+  const [results] = await connection.query(sql, params);
+  const resList = results.map((data) => {
+    return {
+      isUser: data.isUser,
+      message: data.chat_message,
+    };
+  });
+  return res.status(201).json({
+    list: resList,
   });
 });
 
