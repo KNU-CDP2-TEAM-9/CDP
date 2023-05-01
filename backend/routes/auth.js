@@ -1,33 +1,32 @@
 const express = require("express");
 const { hash } = require("bcryptjs");
-const mysql = require("mysql");
+const mysql = require("../config/database");
 const { v4: generateId } = require("uuid");
 const { createJSONToken, isValidPassword } = require("../util/auth");
 const { isValidEmail, isValidText } = require("../util/validation");
-const dbconfig = require("../config/database");
-const connection = mysql.createConnection(dbconfig);
 
 const router = express.Router();
 
 router.post("/signup", async (req, res, next) => {
+  const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
   console.log(data);
   let errors = {};
 
   if (!isValidEmail(data.email)) {
-    console.log(data.email);
     errors.email = "INVALID EMAIL.";
   } else {
-    const inputEmail = data.email;
-    const sql = "select * from user where email = ?";
-    connection.query(sql, [inputEmail], (error, results, fields) => {
-      if (results.length > 0) {
+    try {
+      const sql = "select * from user where email = ?";
+      const [rows] = await connection.query(sql, [data.email]);
+      connection.release();
+      if (rows.length > 0) {
         errors.email = "Email exists already";
       }
-    });
-    try {
     } catch (error) {
-      console.log("MAYBE SQL ERROR");
+      return res.status(422).json({
+        message: "MYSQL ERROR",
+      });
     }
   }
 
@@ -51,7 +50,7 @@ router.post("/signup", async (req, res, next) => {
       console.log("INSERT USER SUCCESS!");
     });
     const authToken = createJSONToken(newUser.id);
-    res.status(201).json({ message: "SIGNIN", token: authToken });
+    return res.status(201).json({ message: "SIGNIN", token: authToken });
   } catch (error) {
     next(error);
   }
@@ -79,7 +78,7 @@ router.post("/login", async (req, res, next) => {
       });
     }
     const authToken = createJSONToken(curUser.id);
-    res.status(201).json({ message: "LOGIN", token: authToken });
+    return res.status(201).json({ message: "LOGIN", token: authToken });
   });
 });
 
