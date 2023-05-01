@@ -46,9 +46,8 @@ router.post("/signup", async (req, res, next) => {
     const hashedPw = await hash(data.password, 12);
     const newUser = { id: gid, email: data.email, password: hashedPw };
     const sql = "insert into user set ?";
-    connection.query(sql, [newUser], (error, results, fields) => {
-      console.log("INSERT USER SUCCESS!");
-    });
+    await connection.query(sql, [newUser]);
+    connection.release();
     const authToken = createJSONToken(newUser.id);
     return res.status(201).json({ message: "SIGNIN", token: authToken });
   } catch (error) {
@@ -57,14 +56,17 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
+  const connection = await mysql.getConnection(async (conn) => conn);
   const email = req.body.email;
   const password = req.body.password;
+  let errors = {};
 
   const sql = "select * from user where email = ?";
-  connection.query(sql, [email], async (error, results, fields) => {
-    if (error || results.length != 1) {
-      return res.status(401).json({ message: "Authentication Failed" });
-    }
+  const [results, fields] = await connection.query(sql, [email]);
+  console.log(results);
+  if (results.length != 1) {
+    errors.email = "Invalid Email";
+  } else {
     const curUser = {
       id: results[0].id,
       email: results[0].email,
@@ -72,14 +74,19 @@ router.post("/login", async (req, res, next) => {
     };
     const pwIsValid = await isValidPassword(password, curUser.password);
     if (!pwIsValid) {
-      return res.status(422).json({
-        message: "Invalid credentials.",
-        errors: { credentials: "Invalid email or password entered." },
-      });
+      errors.password = "Invalid Password";
     }
-    const authToken = createJSONToken(curUser.id);
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return res.status(422).json({
+      message: "User signup failed due to validation errors",
+      errors,
+    });
+  } else {
+    const authToken = createJSONToken(results[0].id);
     return res.status(201).json({ message: "LOGIN", token: authToken });
-  });
+  }
 });
 
 module.exports = router;
