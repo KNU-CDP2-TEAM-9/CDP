@@ -20,12 +20,10 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            id: "chat-default",
             element: <MainPage isDefault={true}></MainPage>,
           },
           {
             path: ":id",
-            id: "chat-field",
             element: <MainPage isDefault={false}></MainPage>,
           },
         ],

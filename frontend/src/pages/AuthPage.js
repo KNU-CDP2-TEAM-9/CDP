@@ -42,9 +42,7 @@ export async function action({ request }) {
   if (resData.message === "SIGNIN") {
     return redirect("/");
   } else if (resData.message === "LOGIN") {
-    const id = resData.id;
     const token = resData.token;
-    localStorage.setItem("id", id);
     localStorage.setItem("token", token);
     return redirect("/main");
   }

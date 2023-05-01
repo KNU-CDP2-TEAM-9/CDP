@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import classes from "../css/Chat.module.css";
 import ChatForm from "./ChatForm";
 import { useLocation } from "react-router-dom";
+
 const Chat = () => {
   const location = useLocation();
   const locationList = location.pathname.split("/");
@@ -13,9 +14,8 @@ const Chat = () => {
     const loadList = async (fId) => {
       console.log(fId);
       const token = localStorage.getItem("token");
-      const id = localStorage.getItem("id");
       const fieldId = fId;
-      const fieldInfo = { id: id, fieldId: fieldId };
+      const fieldInfo = { token: token, fieldId: fieldId };
       const response = await fetch("http://localhost:8080/chat/" + fieldId, {
         method: "POST",
         headers: {
@@ -34,7 +34,7 @@ const Chat = () => {
       setChatList(resList);
     };
     loadList(fieldId);
-  }, [location]);
+  }, [location, fieldId]);
 
   const AddChatToList = (items) => {
     const value = { isUser: true, message: items };
