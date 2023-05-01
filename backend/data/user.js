@@ -25,7 +25,6 @@ app.get("/users", (req, res) => {
     console.log("User info is: ", rows);
     res.send(rows);
   });
-  const userData = { id: "hello", password: "zaq" };
   connection.query("SELECT * FROM Users", (error, results, fields) => {
     if (error) throw error;
     console.log(results);

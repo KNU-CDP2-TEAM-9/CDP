@@ -4,6 +4,7 @@ const { v4: generateId } = require("uuid");
 const { checkAuth } = require("../util/auth");
 const router = express.Router();
 const dbconfig = require("../config/database");
+const { decode } = require("jsonwebtoken");
 const connection = mysql.createConnection(dbconfig);
 
 router.use(checkAuth);
@@ -11,7 +12,7 @@ router.use(checkAuth);
 router.post("/", async (req, res, next) => {
   const data = req.body;
   console.log(data);
-  const id = data.id;
+  const id = decode(data.token).id;
   const message = data.message;
   const fieldId = data.fieldId;
   const sql = "insert into user_chat set ?";
@@ -38,7 +39,7 @@ router.post("/", async (req, res, next) => {
 // 두 번 출력. 수정해애됨
 router.post("/field", (req, res, next) => {
   const data = req.body;
-  const userId = data.id;
+  const userId = decode(data.token).id;
   const sql = "select * from chat_field where id = ?";
   connection.query(sql, userId, (error, results, fields) => {
     if (error) {
@@ -58,7 +59,7 @@ router.post("/field", (req, res, next) => {
 
 router.patch("/field", (req, res, next) => {
   const data = req.body;
-  const userId = data.id;
+  const userId = decode(data.token).id;
   const fieldId = generateId();
   const sql = "insert into chat_field set ?";
   const field = { id: userId, fieldId: fieldId };
@@ -75,7 +76,8 @@ router.patch("/field", (req, res, next) => {
 
 router.post("/:fieldId", (req, res, next) => {
   const data = req.body;
-  const params = [data.id, data.fieldId];
+  const id = decode(data.token).id;
+  const params = [id, data.fieldId];
   const sql = "select * from user_chat where user_id = ? and field_index = ?";
   connection.query(sql, params, (error, results, fields) => {
     if (error) {

@@ -50,10 +50,8 @@ router.post("/signup", async (req, res, next) => {
     connection.query(sql, [newUser], (error, results, fields) => {
       console.log("INSERT USER SUCCESS!");
     });
-    const authToken = createJSONToken(newUser.email);
-    res
-      .status(201)
-      .json({ message: "SIGNIN", id: newUser.id, token: authToken });
+    const authToken = createJSONToken(newUser.id);
+    res.status(201).json({ message: "SIGNIN", token: authToken });
   } catch (error) {
     next(error);
   }
@@ -80,10 +78,8 @@ router.post("/login", async (req, res, next) => {
         errors: { credentials: "Invalid email or password entered." },
       });
     }
-    const authToken = createJSONToken(email);
-    res
-      .status(201)
-      .json({ message: "LOGIN", id: curUser.id, token: authToken });
+    const authToken = createJSONToken(curUser.id);
+    res.status(201).json({ message: "LOGIN", token: authToken });
   });
 });
 
