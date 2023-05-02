@@ -63,6 +63,7 @@ router.post("/login", async (req, res, next) => {
 
   const sql = "select * from user where email = ?";
   const [results, fields] = await connection.query(sql, [email]);
+  connection.release();
   console.log(results);
   if (results.length != 1) {
     errors.email = "Invalid Email";
