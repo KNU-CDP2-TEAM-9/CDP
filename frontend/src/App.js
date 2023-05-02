@@ -4,7 +4,11 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
+import MainIdPage from "./pages/MainIdPage";
+import MainRoot from "./pages/MainRoot";
+import { loader as mainLoader } from "./pages/MainRoot";
 import { action as authAction } from "./pages/AuthPage";
+import { loader as chatLoader } from "./pages/MainIdPage";
 
 const router = createBrowserRouter([
   {
@@ -17,14 +21,18 @@ const router = createBrowserRouter([
       { path: "auth", element: <AuthPage></AuthPage>, action: authAction },
       {
         path: "main",
+        element: <MainRoot></MainRoot>,
+        loader: mainLoader,
         children: [
           {
             index: true,
-            element: <MainPage isDefault={true}></MainPage>,
+            element: <MainPage></MainPage>,
           },
           {
-            path: ":id",
-            element: <MainPage isDefault={false}></MainPage>,
+            path: ":chatId",
+            id: "chat",
+            element: <MainIdPage></MainIdPage>,
+            loader: chatLoader,
           },
         ],
       },

@@ -3,24 +3,13 @@ import { Link } from "react-router-dom";
 import classes from "../css/Side.module.css";
 import { useEffect, useState } from "react";
 
-const Side = () => {
+const Side = (props) => {
+  console.log("hi");
   const [chatList, setChatList] = useState([]);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const fetchData = async () => {
-      const info = { token: token };
-      const response = await fetch("http://localhost:8080/chat/chatList", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-        body: JSON.stringify(info),
-      });
-      const resData = await response.json();
-      setChatList(resData.list);
-    };
-    fetchData();
+    if (props.list !== undefined) {
+      setChatList(props.list);
+    }
   }, []);
 
   const addNewChatting = async () => {

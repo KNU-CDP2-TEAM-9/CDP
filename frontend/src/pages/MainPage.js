@@ -1,7 +1,8 @@
-import Contents from "../component/Contents";
+import React from "react";
+import ChatInit from "../component/ChatInit";
 
-const MainPage = (props) => {
-  return <Contents isDefault={props.isDefault}></Contents>;
+const MainPage = () => {
+  return <ChatInit />;
 };
 
 export default MainPage;
