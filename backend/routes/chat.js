@@ -25,8 +25,7 @@ router.post("/msg", async (req, res, next) => {
   await connection.query(sql, [msg]);
   connection.release();
   return res.status(201).json({
-    userId: msg.userId,
-    chatId: msg.chatId,
+    isUser: msg.isUser,
     text: msg.text,
   });
 });
