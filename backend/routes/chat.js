@@ -71,6 +71,7 @@ router.post("/:chatId", async (req, res, next) => {
   const params = [userId, data.chatId];
   const sql = "select * from message where userId = ? and chatId = ?";
   const [results] = await connection.query(sql, params);
+  connection.release();
   const resList = results.map((data) => {
     return {
       isUser: data.isUser,
