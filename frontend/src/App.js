@@ -7,8 +7,9 @@ import MainPage from "./pages/MainPage";
 import MainIdPage from "./pages/MainIdPage";
 import MainRoot from "./pages/MainRoot";
 import { loader as mainLoader } from "./pages/MainRoot";
-import { action as authAction } from "./pages/AuthPage";
 import { loader as chatLoader } from "./pages/MainIdPage";
+import { action as messageAction } from "./pages/MainIdPage";
+import { action as authAction } from "./pages/AuthPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
             id: "chat",
             element: <MainIdPage></MainIdPage>,
             loader: chatLoader,
+            action: messageAction,
           },
         ],
       },
