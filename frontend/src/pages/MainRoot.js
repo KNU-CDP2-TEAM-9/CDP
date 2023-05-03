@@ -37,6 +37,9 @@ async function loadChatList() {
     body: JSON.stringify(info),
   });
   const resData = await response.json();
+  if (resData.message === "Not Authenticated.") {
+    throw new Response("Bad Request", { status: 401 });
+  }
   return resData.list;
 }
 

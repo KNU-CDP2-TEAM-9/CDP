@@ -13,13 +13,13 @@ App.use((req, res, next) => {
   next();
 });
 
-App.use(authRoutes);
+App.use("/auth", authRoutes);
 App.use("/chat", chattingRoutes);
 
 App.use((error, req, res, next) => {
   const status = error.status || 500;
   const message = error.message || "Something went wrong.";
-  res.status(status).json({ message: message });
+  res.status(status).json({ message: message, status: status });
 });
 
 App.listen(8080);
