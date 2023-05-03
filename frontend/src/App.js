@@ -6,10 +6,14 @@ import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import MainIdPage from "./pages/MainIdPage";
 import MainRoot from "./pages/MainRoot";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
 import { loader as mainLoader } from "./pages/MainRoot";
 import { loader as chatLoader } from "./pages/MainIdPage";
 import { action as messageAction } from "./pages/MainIdPage";
 import { action as authAction } from "./pages/AuthPage";
+import { action as loginAction } from "./pages/LoginPage";
+import { action as SignUpAction } from "./pages/SignUpPage";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +23,12 @@ const router = createBrowserRouter([
     id: "root",
     children: [
       { index: true, element: <HomePage /> },
-      { path: "auth", element: <AuthPage></AuthPage>, action: authAction },
+      { path: "login", element: <LoginPage></LoginPage>, action: loginAction },
+      {
+        path: "signup",
+        element: <SignUpPage></SignUpPage>,
+        action: SignUpAction,
+      },
       {
         path: "main",
         element: <MainRoot></MainRoot>,
