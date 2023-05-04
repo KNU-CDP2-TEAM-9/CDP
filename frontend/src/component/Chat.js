@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useActionData } from "react-router-dom";
 import classes from "../css/Chat.module.css";
 import MessageForm from "./MessageForm";
 
 const Chat = (props) => {
-  const data = useActionData();
   const [msgList, setMsgList] = useState([]);
 
   useEffect(() => {
     if (props.list !== undefined) {
       setMsgList(props.list);
     }
-    if (data !== undefined && data !== null) {
-      setMsgList((prev) => {
-        return [...prev, data];
-      });
-    }
-  }, [props.list, data]);
+  }, [props.list]);
+
+  const AddMsgHandler = (item) => {
+    const value = { isUser: true, text: item };
+    setMsgList((prev) => {
+      return [...prev, value];
+    });
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -31,9 +31,9 @@ const Chat = (props) => {
           })}
         </ul>
       </div>
-      <MessageForm></MessageForm>
+      <MessageForm onAdd={AddMsgHandler} chatId={props.chatId}></MessageForm>
     </div>
   );
 };
 
-export default Chat;
+export default React.memo(Chat);

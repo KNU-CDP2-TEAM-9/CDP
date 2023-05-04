@@ -1,10 +1,28 @@
-import { Form, Link, useActionData, useNavigation } from "react-router-dom";
+import {
+  Form,
+  Link,
+  useActionData,
+  useNavigation,
+  useNavigate,
+} from "react-router-dom";
 import classes from "../css/LoginForm.module.css";
+import { useEffect } from "react";
 
 const LoginForm = () => {
   const data = useActionData();
+  const navigate = useNavigate();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  useEffect(() => {
+    if (data) {
+      if (data.message === "RouteTrue") {
+        console.log("adfafdfads");
+        navigate(-2);
+      } else if (data.message === "RouteFalse") {
+        navigate(-1);
+      }
+    }
+  }, [data]);
 
   return (
     <>

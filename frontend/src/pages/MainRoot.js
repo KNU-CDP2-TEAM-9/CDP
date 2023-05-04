@@ -26,7 +26,6 @@ const MainRoot = () => {
 
 async function loadChatList() {
   const token = localStorage.getItem("token");
-
   const info = { token: token };
   const response = await fetch("http://localhost:8080/chat/chatList", {
     method: "POST",
@@ -37,9 +36,6 @@ async function loadChatList() {
     body: JSON.stringify(info),
   });
   const resData = await response.json();
-  if (resData.message === "Not Authenticated.") {
-    throw new Response("Bad Request", { status: 401 });
-  }
   return resData.list;
 }
 
@@ -49,4 +45,4 @@ export async function loader() {
   });
 }
 
-export default MainRoot;
+export default React.memo(MainRoot);

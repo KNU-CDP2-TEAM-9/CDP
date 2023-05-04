@@ -68,7 +68,16 @@ router.post("/:chatId", async (req, res, next) => {
   const data = req.body;
   const userId = decode(data.token).userId;
   const params = [userId, data.chatId];
-  const sql = "select * from message where userId = ? and chatId = ?";
+  let sql = "select userId from chat where chatId = ?";
+  const [users] = await connection.query(sql, [data.chatId]);
+  connection.release();
+  const checkId = users.find((item) => item.userId === userId);
+  if (checkId === undefined) {
+    return res.status(422).json({
+      message: "unvalid routing",
+    });
+  }
+  sql = "select * from message where userId = ? and chatId = ?";
   const [results] = await connection.query(sql, params);
   connection.release();
   const resList = results.map((data) => {

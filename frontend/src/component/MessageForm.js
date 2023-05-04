@@ -1,33 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { Form, useActionData } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classes from "../css/MessageForm.module.css";
-const MessageForm = () => {
-  const data = useActionData();
+const MessageForm = (props) => {
   const [msgText, setMsgText] = useState("");
-
-  useEffect(() => {
-    if (data !== undefined && data !== null) {
-      setMsgText("");
-    }
-  }, [data]);
+  const navigate = useNavigate();
 
   const msgTextHandler = (event) => {
     setMsgText(event.target.value);
   };
 
+  const SubmitHandler = async (event) => {
+    event.preventDefault();
+    props.onAdd(msgText);
+    const token = localStorage.getItem("token");
+    const msgInfo = {
+      text: msgText,
+      token: token,
+      chatId: props.chatId,
+    };
+    const response = await fetch("http://localhost:8080/chat/msg", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(msgInfo),
+    });
+    const resData = await response.json();
+    if (resData.message === "Not Authenticated.") {
+      navigate("/login?mode=error&isroute=false");
+    }
+    setMsgText("");
+  };
+
   return (
     <>
-      <Form method="post">
+      <form action="#" id="Chatting" onSubmit={SubmitHandler}>
         <input
-          id="message"
           className={classes.InputChat}
           type="text"
           value={msgText}
           onChange={msgTextHandler}
-          name="message"
-          required
         ></input>
-      </Form>
+      </form>
     </>
   );
 };
