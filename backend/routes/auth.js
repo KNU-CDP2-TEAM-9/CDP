@@ -45,11 +45,24 @@ router.post("/signup", async (req, res, next) => {
     const gid = generateId();
     const hashedPw = await hash(data.password, 12);
     const newUser = { userId: gid, email: data.email, password: hashedPw };
-    const sql = "insert into user set ?";
+    let sql = "insert into user set ?";
     await connection.query(sql, [newUser]);
     connection.release();
-    const authToken = createJSONToken(newUser.userId);
-    return res.status(201).json({ message: "SIGNIN", token: authToken });
+    const newUserInfo = {
+      nickName: data.nickName,
+      firstName: null,
+      lastName: null,
+      dept: null,
+      phoneNumber: null,
+      grade: null,
+      earned_credit: null,
+      goal_credit: null,
+      userId: newUser.userId,
+    };
+    sql = "insert into user_info set ?";
+    await connection.query(sql, [newUserInfo]);
+    connection.release();
+    return res.status(201).json({ message: "SIGNIN" });
   } catch (error) {
     next(error);
   }
@@ -62,7 +75,7 @@ router.post("/login", async (req, res, next) => {
   let errors = {};
 
   const sql = "select * from user where email = ?";
-  const [results, fields] = await connection.query(sql, [email]);
+  const [results] = await connection.query(sql, [email]);
   connection.release();
   console.log(results);
   if (results.length != 1) {

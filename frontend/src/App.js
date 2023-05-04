@@ -2,7 +2,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
-import AuthPage from "./pages/AuthPage";
 import MainPage from "./pages/MainPage";
 import MainIdPage from "./pages/MainIdPage";
 import MainRoot from "./pages/MainRoot";
@@ -11,15 +10,17 @@ import SignUpPage from "./pages/SignUpPage";
 import { loader as mainLoader } from "./pages/MainRoot";
 import { loader as chatLoader } from "./pages/MainIdPage";
 import { action as messageAction } from "./pages/MainIdPage";
-import { action as authAction } from "./pages/AuthPage";
 import { action as loginAction } from "./pages/LoginPage";
 import { action as SignUpAction } from "./pages/SignUpPage";
+import ErrorAuthPage from "./pages/ErrorAuthPage";
+import { loader as RootLoader } from "./pages/Root";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    // loader: RootLoader,
     id: "root",
     children: [
       { index: true, element: <HomePage /> },
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
             id: "chat",
             element: <MainIdPage></MainIdPage>,
             loader: chatLoader,
-            action: messageAction,
+            // action: messageAction,
           },
         ],
       },

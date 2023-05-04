@@ -26,8 +26,8 @@ const SignUpForm = () => {
           <input id="password" type="password" name="password" required />
         </p>
         <p>
-          <label htmlFor="nickname">Password</label>
-          <input id="nickname" type="text" name="nickname" required />
+          <label htmlFor="nickName">nickName</label>
+          <input id="nickName" type="text" name="nickName" required />
         </p>
         <div>
           <button disabled={isSubmitting}>
