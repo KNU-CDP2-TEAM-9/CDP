@@ -1,16 +1,25 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import {
-  useLoaderData,
   useRouteLoaderData,
+  useNavigate,
   defer,
   Await,
-  redirect,
 } from "react-router-dom";
 import React from "react";
 import Chat from "../component/Chat";
 
 const MainIdPage = () => {
   const { msgList, chatId } = useRouteLoaderData("chat");
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log("asdf");
+    if (msgList === "Not Authenticated.") {
+      navigate("/login?mode=error", { replace: true });
+    }
+    if (msgList === "unvalid routing") {
+      navigate("/main", { replace: true });
+    }
+  }, [msgList]);
   return (
     <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
       <Await resolve={msgList}>
@@ -21,7 +30,6 @@ const MainIdPage = () => {
 };
 
 async function loadMessageList(cId) {
-  console.log("adf");
   const token = localStorage.getItem("token");
   const chatId = cId;
   const chatInfo = { token: token, chatId: chatId };
@@ -35,10 +43,9 @@ async function loadMessageList(cId) {
   });
   const resData = await response.json();
   if (resData.message === "Not Authenticated.") {
-    throw new Response("Bad Request", { status: 401 });
-  }
-  if (resData.message === "unvalid routing") {
-    throw new Response("Bad Request", { status: 422 });
+    return "Not Authenticated.";
+  } else if (resData.message === "unvalid routing") {
+    return "unvalid routing";
   }
   const resList = resData.list.map((data) => {
     return {
@@ -56,31 +63,5 @@ export async function loader({ request, params }) {
     chatId: chatId,
   });
 }
-
-// export async function action({ request }) {
-//   const searchParams = new URL(request.url).pathname;
-//   const chatId = searchParams.split("/")[2];
-//   const data = await request.formData();
-//   const msgText = data.get("message");
-//   const token = localStorage.getItem("token");
-//   const msgInfo = {
-//     text: msgText,
-//     token: token,
-//     chatId: chatId,
-//   };
-//   const response = await fetch("http://localhost:8080/chat/msg", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: "Bearer " + token,
-//     },
-//     body: JSON.stringify(msgInfo),
-//   });
-//   const resData = await response.json();
-//   if (resData.message === "Not Authenticated.") {
-//     throw new Response("Bad Request", { status: 401 });
-//   }
-//   return resData;
-// }
 
 export default React.memo(MainIdPage);

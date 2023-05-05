@@ -28,7 +28,7 @@ const MessageForm = (props) => {
     });
     const resData = await response.json();
     if (resData.message === "Not Authenticated.") {
-      navigate("/login?mode=error&isroute=false");
+      navigate("/login?mode=error", { replace: true });
     }
     setMsgText("");
   };

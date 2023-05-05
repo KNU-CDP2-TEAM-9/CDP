@@ -1,5 +1,5 @@
 import React from "react";
-import { json, redirect, useNavigate } from "react-router-dom";
+import { json, redirect } from "react-router-dom";
 import LoginForm from "../component/LoginForm";
 
 const LoginPage = () => {
@@ -40,10 +40,6 @@ export async function action({ request }) {
   if (mode === "init") {
     return redirect("/main");
   } else if (mode === "error") {
-    if (isroute === true) {
-      return json({ message: "RouteTrue" });
-    } else {
-      return json({ message: "RouteFalse" });
-    }
+    return json({ message: "ErrorLogin" });
   }
 }

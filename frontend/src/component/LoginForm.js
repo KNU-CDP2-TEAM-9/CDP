@@ -14,13 +14,8 @@ const LoginForm = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   useEffect(() => {
-    if (data) {
-      if (data.message === "RouteTrue") {
-        console.log("adfafdfads");
-        navigate(-2);
-      } else if (data.message === "RouteFalse") {
-        navigate(-1);
-      }
+    if (data && data.message === "ErrorLogin") {
+      navigate(-1);
     }
   }, [data]);
 

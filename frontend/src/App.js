@@ -9,11 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { loader as mainLoader } from "./pages/MainRoot";
 import { loader as chatLoader } from "./pages/MainIdPage";
-import { action as messageAction } from "./pages/MainIdPage";
 import { action as loginAction } from "./pages/LoginPage";
 import { action as SignUpAction } from "./pages/SignUpPage";
-import ErrorAuthPage from "./pages/ErrorAuthPage";
-import { loader as RootLoader } from "./pages/Root";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +41,6 @@ const router = createBrowserRouter([
             id: "chat",
             element: <MainIdPage></MainIdPage>,
             loader: chatLoader,
-            // action: messageAction,
           },
         ],
       },
