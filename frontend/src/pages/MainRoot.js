@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Suspense } from "react";
-import { useLoaderData, defer, Await, Outlet } from "react-router-dom";
+import {
+  useLoaderData,
+  defer,
+  Await,
+  Outlet,
+  useNavigate,
+} from "react-router-dom";
 import classes from "../css/Contents.module.css";
 import Bottom from "../component/Bottom";
 import Side from "../component/Side";
 
 const MainRoot = () => {
   const { list } = useLoaderData();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (list === "Not Authenticated.") {
+      navigate("/login?mode=error", { replace: true });
+    }
+  }, [list]);
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
@@ -36,6 +49,9 @@ async function loadChatList() {
     body: JSON.stringify(info),
   });
   const resData = await response.json();
+  if (resData.message === "Not Authenticated.") {
+    return "Not Authenticated.";
+  }
   return resData.list;
 }
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
@@ -11,8 +12,4 @@ const RootLayout = () => {
   );
 };
 
-export async function loader() {
-  console.log("sadsa");
-}
-
-export default RootLayout;
+export default React.memo(RootLayout);
