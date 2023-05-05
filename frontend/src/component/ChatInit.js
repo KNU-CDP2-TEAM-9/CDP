@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import classes from "../css/ChatInit.module.css";
 const ChatInit = () => {
   return (
