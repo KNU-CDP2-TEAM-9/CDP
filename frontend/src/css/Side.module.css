@@ -1,6 +1,7 @@
 .wrapper {
   height: 1060px;
   background-color: aqua;
+  overflow: scroll;
 }
 .item {
   height: 100px;
