@@ -3,6 +3,8 @@ const express = require("express");
 
 const chattingRoutes = require("./routes/chat");
 const authRoutes = require("./routes/auth");
+const userInfoRoutes = require("./routes/userInfo");
+const memoRoutes = require("./routes/memo");
 const App = express();
 App.use(bodyParser.json());
 
@@ -15,6 +17,8 @@ App.use((req, res, next) => {
 
 App.use("/auth", authRoutes);
 App.use("/chat", chattingRoutes);
+App.use("/userInfo", userInfoRoutes);
+App.use("/memo", memoRoutes);
 
 App.use((error, req, res, next) => {
   const status = error.status || 500;
