@@ -11,7 +11,6 @@ export default LoginPage;
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;
   const mode = searchParams.get("mode");
-  const isroute = searchParams.get("isroute");
   const data = await request.formData();
   const authData = {
     email: data.get("email"),
