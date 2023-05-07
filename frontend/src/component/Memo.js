@@ -45,7 +45,7 @@ const Memo = (props) => {
           memoId={memoId}
           memoText={
             memoId !== undefined
-              ? props.memoList.find((obj) => obj.id === memoId)?.memoText
+              ? props.memoList.find((obj) => obj.memoId === memoId)?.memoText
               : ""
           }
           onAdd={AddHandler}

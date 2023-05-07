@@ -15,6 +15,7 @@ const MemoForm = (props) => {
   };
 
   const SubmitHandler = async (event) => {
+    console.log(props.memoText);
     event.preventDefault();
     const token = localStorage.getItem("token");
     if (props.memoId === undefined) {
@@ -70,7 +71,7 @@ const MemoForm = (props) => {
         <input
           type="text"
           name="memo"
-          value={memoText}
+          value={memoText || ""}
           onChange={memoTextHandler}
         ></input>
       </form>
