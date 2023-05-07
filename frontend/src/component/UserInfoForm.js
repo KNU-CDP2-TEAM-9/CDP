@@ -3,16 +3,6 @@ import { useNavigate } from "react-router-dom";
 import classes from "../css/UserInfoForm.module.css";
 const UserInfoForm = (props) => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
-    nickName: undefined,
-    firstName: undefined,
-    lastName: undefined,
-    dept: undefined,
-    phoneNumber: undefined,
-    grade: undefined,
-    earned_credit: undefined,
-    goal_credit: undefined,
-  });
   const [isEditing, setIsEditing] = useState({
     nickName: false,
     firstName: false,
@@ -23,11 +13,6 @@ const UserInfoForm = (props) => {
     earned_credit: false,
     goal_credit: false,
   });
-  useEffect(() => {
-    if (props.userInfo !== undefined) {
-      setUserInfo(props.userInfo);
-    }
-  }, [props.userInfo]);
   const SubmitHandler = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
@@ -51,10 +36,7 @@ const UserInfoForm = (props) => {
     if (resData.message === "Not Authenticated.") {
       navigate("/login?mode=error", { replace: true });
     }
-    setUserInfo((prev) => ({
-      ...prev,
-      [edit]: info.editValue,
-    }));
+    props.onFix(edit, info.editValue);
     setIsEditing((prev) => ({
       ...prev,
       [edit]: false,
@@ -73,7 +55,7 @@ const UserInfoForm = (props) => {
       nickName
       {isEditing.nickName === false ? (
         <div id="nickName" onClick={ClickHandler}>
-          {userInfo.nickName ? userInfo.nickName : "----"}
+          {props.userInfo.nickName ? props.userInfo.nickName : "----"}
         </div>
       ) : (
         <form action="#" id="nickName" onSubmit={SubmitHandler}>
@@ -81,14 +63,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.nickName}
+            value={props.userInfo.nickName}
           ></input>
         </form>
       )}
       firstName
       {isEditing.firstName === false ? (
         <div id="firstName" onClick={ClickHandler}>
-          {userInfo.firstName ? userInfo.firstName : "----"}
+          {props.userInfo.firstName ? props.userInfo.firstName : "----"}
         </div>
       ) : (
         <form action="#" id="firstName" onSubmit={SubmitHandler}>
@@ -96,14 +78,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.firstName}
+            value={props.userInfo.firstName}
           ></input>
         </form>
       )}
       lastName
       {isEditing.lastName === false ? (
         <div id="lastName" onClick={ClickHandler}>
-          {userInfo.lastName ? userInfo.lastName : "----"}
+          {props.userInfo.lastName ? props.userInfo.lastName : "----"}
         </div>
       ) : (
         <form action="#" id="lastName" onSubmit={SubmitHandler}>
@@ -111,14 +93,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.lastName}
+            value={props.userInfo.lastName}
           ></input>
         </form>
       )}
       dept
       {isEditing.dept === false ? (
         <div id="dept" onClick={ClickHandler}>
-          {userInfo.dept ? userInfo.dept : "----"}
+          {props.userInfo.dept ? props.userInfo.dept : "----"}
         </div>
       ) : (
         <form action="#" id="dept" onSubmit={SubmitHandler}>
@@ -126,14 +108,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.dept}
+            value={props.userInfo.dept}
           ></input>
         </form>
       )}
       phoneNumber
       {isEditing.phoneNumber === false ? (
         <div id="phoneNumber" onClick={ClickHandler}>
-          {userInfo.phoneNumber ? userInfo.phoneNumber : "----"}
+          {props.userInfo.phoneNumber ? props.userInfo.phoneNumber : "----"}
         </div>
       ) : (
         <form action="#" id="phoneNumber" onSubmit={SubmitHandler}>
@@ -141,14 +123,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.phoneNumber}
+            value={props.userInfo.phoneNumber}
           ></input>
         </form>
       )}
       grade
       {isEditing.grade === false ? (
         <div id="grade" onClick={ClickHandler}>
-          {userInfo.grade ? userInfo.grade : "----"}
+          {props.userInfo.grade ? props.userInfo.grade : "----"}
         </div>
       ) : (
         <form action="#" id="grade" onSubmit={SubmitHandler}>
@@ -156,14 +138,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.grade}
+            value={props.userInfo.grade}
           ></input>
         </form>
       )}
       earned_credit
       {isEditing.earned_credit === false ? (
         <div id="earned_credit" onClick={ClickHandler}>
-          {userInfo.earned_credit ? userInfo.earned_credit : "----"}
+          {props.userInfo.earned_credit ? props.userInfo.earned_credit : "----"}
         </div>
       ) : (
         <form action="#" id="earned_credit" onSubmit={SubmitHandler}>
@@ -171,14 +153,14 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.earned_credit}
+            value={props.userInfo.earned_credit}
           ></input>
         </form>
       )}
       goal_credit
       {isEditing.goal_credit === false ? (
         <div id="goal_credit" onClick={ClickHandler}>
-          {userInfo.goal_credit ? userInfo.goal_credit : "----"}
+          {props.userInfo.goal_credit ? props.userInfo.goal_credit : "----"}
         </div>
       ) : (
         <form action="#" id="goal_credit" onSubmit={SubmitHandler}>
@@ -186,7 +168,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={userInfo.goal_credit}
+            value={props.userInfo.goal_credit}
           ></input>
         </form>
       )}

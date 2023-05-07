@@ -12,7 +12,7 @@ import Bottom from "../component/Bottom";
 import Side from "../component/Side";
 
 const MainRoot = () => {
-  const { chatList, userInfo } = useLoaderData();
+  const { chatList, userInfo, memo } = useLoaderData();
   const navigate = useNavigate();
   useEffect(() => {
     if (chatList === "Not Authenticated.") {
@@ -21,18 +21,25 @@ const MainRoot = () => {
     if (userInfo === "Not Authenticated.") {
       navigate("/login?mode=error", { replace: true });
     }
-  }, [chatList, userInfo]);
+    if (memo === "Not Authenticated") {
+      navigate("/login?mode=error", { replace: true });
+    }
+  }, [chatList, userInfo, memo]);
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.primary}>
         <Outlet></Outlet>
         <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
-          <Await resolve={userInfo}>
-            {(loadedObject) => <Bottom userInfo={loadedObject} />}
+          <Await resolve={{ userInfo, memo }}>
+            {(loadedObject) => (
+              <Bottom
+                userInfo={loadedObject.userInfo}
+                memo={loadedObject.memo}
+              />
+            )}
           </Await>
         </Suspense>
-        <Bottom />
       </div>
       <div className={classes.secondary}>
         <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
@@ -81,10 +88,30 @@ async function loadUserInfo() {
   return resData.info;
 }
 
+async function loadMemo() {
+  const token = localStorage.getItem("token");
+  const info = { token: token };
+  const response = await fetch("http://localhost:8080/memo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(info),
+  });
+  const resData = await response.json();
+  if (resData.message === "Not Authenticated.") {
+    return "Not Authenticated.";
+  }
+  return resData.list;
+}
+
 export async function loader() {
+  console.log("sdfdsfadsfsdafafadf");
   return defer({
     chatList: await loadChatList(),
     userInfo: await loadUserInfo(),
+    memo: await loadMemo(),
   });
 }
 

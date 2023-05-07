@@ -41,8 +41,6 @@ router.patch("/", async (req, res, next) => {
   const token = data.token;
   const userId = decode(token).userId;
   const params = [editValue, userId];
-  console.log(editId);
-  console.log(editValue);
   const sql = `update user_info set  ${editId} = ? where userId = ?`;
   await connection.query(sql, params);
   connection.release();

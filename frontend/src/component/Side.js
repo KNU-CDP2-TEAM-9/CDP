@@ -1,11 +1,14 @@
 import React from "react";
 import classes from "../css/Side.module.css";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import ChatField from "./ChatField";
 import AddChat from "./AddChat";
 
 const Side = (props) => {
-  console.log("hi");
+  const location = useLocation();
+  const curLocation = location.pathname.split("/")[2];
+  const curParam = location.hash;
   const [chatList, setChatList] = useState([]);
 
   useEffect(() => {
@@ -15,7 +18,6 @@ const Side = (props) => {
   }, []);
 
   const addNewChatting = (item) => {
-    console.log("adsfdsfasdfdsf");
     const value = { userId: item.userId, chatId: item.chatId };
     setChatList((prev) => {
       return [...prev, value];
@@ -29,7 +31,11 @@ const Side = (props) => {
         {chatList.map((item, index) => {
           return (
             <li className={classes.item} key={index}>
-              <ChatField chatId={item.chatId}></ChatField>
+              {curLocation !== item.chatId ? (
+                <ChatField chatId={item.chatId} curParam={curParam}></ChatField>
+              ) : (
+                <p>{item.chatId}</p>
+              )}
             </li>
           );
         })}
