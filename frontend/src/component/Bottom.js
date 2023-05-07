@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "../css/Bottom.module.css";
 import UserInfoForm from "./UserInfoForm";
 import Memo from "./Memo";
 import { useLocation } from "react-router-dom";
 const Bottom = (props) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [userInfo, setUserInfo] = useState({});
   const [memo, setMemo] = useState([]);
@@ -34,25 +35,32 @@ const Bottom = (props) => {
     });
   };
 
+  const LogOutHandler = () => {
+    localStorage.removeItem("token");
+    navigate("/login?mode=init");
+  };
+
   const curParam = location.hash;
   return (
     <>
-      {curParam !== "#userInfo" ? (
-        <Link to="#userInfo" relative="path">
-          <div>userInfo</div>
-        </Link>
-      ) : (
-        <div>userInfo</div>
-      )}
-      {curParam !== "#memo" ? (
-        <Link to="#memo" relative="path">
-          <div>Memo</div>
-        </Link>
-      ) : (
-        <div>Memo</div>
-      )}
-
       <div className={classes.wrapper}>
+        {curParam !== "#userInfo" ? (
+          <Link to="#userInfo" relative="path">
+            <div>userInfo</div>
+          </Link>
+        ) : (
+          <div>userInfo</div>
+        )}
+        {curParam !== "#memo" ? (
+          <Link to="#memo" relative="path">
+            <div>Memo</div>
+          </Link>
+        ) : (
+          <div>Memo</div>
+        )}
+        <div>
+          <button onClick={LogOutHandler}>LogOut</button>
+        </div>
         {curParam === "#userInfo" && (
           <UserInfoForm
             userInfo={userInfo}
