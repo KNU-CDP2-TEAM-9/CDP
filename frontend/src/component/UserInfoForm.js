@@ -63,7 +63,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.nickName}
+            defaultValue={props.userInfo.nickName}
           ></input>
         </form>
       )}
@@ -78,7 +78,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.firstName}
+            defaultValue={props.userInfo.firstName}
           ></input>
         </form>
       )}
@@ -93,7 +93,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.lastName}
+            defaultValue={props.userInfo.lastName}
           ></input>
         </form>
       )}
@@ -108,7 +108,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.dept}
+            defaultValue={props.userInfo.dept}
           ></input>
         </form>
       )}
@@ -123,7 +123,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.phoneNumber}
+            defaultValue={props.userInfo.phoneNumber}
           ></input>
         </form>
       )}
@@ -138,7 +138,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.grade}
+            defaultValue={props.userInfo.grade}
           ></input>
         </form>
       )}
@@ -153,7 +153,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.earned_credit}
+            defaultValue={props.userInfo.earned_credit}
           ></input>
         </form>
       )}
@@ -168,7 +168,7 @@ const UserInfoForm = (props) => {
             className={classes.Input}
             type="text"
             name="Input"
-            value={props.userInfo.goal_credit}
+            defaultValue={props.userInfo.goal_credit}
           ></input>
         </form>
       )}
