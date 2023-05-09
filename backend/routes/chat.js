@@ -4,6 +4,9 @@ const { v4: generateId } = require("uuid");
 const { checkAuth } = require("../util/auth");
 const router = express.Router();
 const { decode } = require("jsonwebtoken");
+const { findAllNode } = require("../data/neo4j");
+const { findResultNode } = require("../data/neo4j");
+const { MakeSentence } = require("../data/util");
 
 router.use(checkAuth);
 
@@ -14,7 +17,7 @@ router.post("/msg", async (req, res, next) => {
   const text = data.text;
   const chatId = data.chatId;
   const sendDate = new Date();
-  const sql = "insert into message set ?";
+  let sql = "insert into message set ?";
   const msg = {
     userId: userId,
     chatId: chatId,
@@ -24,9 +27,37 @@ router.post("/msg", async (req, res, next) => {
   };
   await connection.query(sql, [msg]);
   connection.release();
+
+  const neo4jList = await findAllNode();
+  let WordList = [];
+  neo4jList.forEach((item) => {
+    if (text.includes(item)) {
+      WordList.push(item);
+    }
+  });
+
+  BotText = await MakeSentence(WordList);
+
+  sql = "insert into message set ?";
+  const msg_bot = {
+    userId: userId,
+    chatId: chatId,
+    text: BotText,
+    isUser: false,
+    sendDate: sendDate,
+  };
+  await connection.query(sql, [msg_bot]);
+  connection.release();
+
   return res.status(201).json({
-    isUser: msg.isUser,
-    text: msg.text,
+    BotText: {
+      isUser: msg_bot.isUser,
+      text: msg_bot.text,
+    },
+    UserText: {
+      isUser: msg.isUser,
+      text: msg.text,
+    },
   });
 });
 

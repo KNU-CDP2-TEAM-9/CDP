@@ -23,20 +23,42 @@ const Chat = (props) => {
     });
   };
 
+  const AddBotHandler = (item) => {
+    const value = { isUser: false, text: item };
+    setMsgList((prev) => {
+      return [...prev, value];
+    });
+  };
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.ulWrapper} ref={divRef}>
         <ul className={classes.list}>
           {msgList.map((item, index) => {
-            return (
+            return item.isUser ? (
               <li className={classes.item} key={index}>
                 {item.text}
+              </li>
+            ) : (
+              <li className={classes.item} key={index}>
+                {item.text.split("\n").map((value, key) => {
+                  return (
+                    <div key={key}>
+                      {value}
+                      <br />
+                    </div>
+                  );
+                })}
               </li>
             );
           })}
         </ul>
       </div>
-      <MessageForm onAdd={AddMsgHandler} chatId={props.chatId}></MessageForm>
+      <MessageForm
+        onAdd={AddMsgHandler}
+        chatId={props.chatId}
+        onAddBot={AddBotHandler}
+      ></MessageForm>
     </div>
   );
 };

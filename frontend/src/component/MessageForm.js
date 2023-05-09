@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "../css/MessageForm.module.css";
 const MessageForm = (props) => {
@@ -30,7 +30,12 @@ const MessageForm = (props) => {
     if (resData.message === "Not Authenticated.") {
       navigate("/login?mode=error", { replace: true });
     }
+
     setMsgText("");
+
+    const BotText = resData.BotText.text;
+
+    props.onAddBot(BotText);
   };
 
   return (

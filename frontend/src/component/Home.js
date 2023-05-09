@@ -4,7 +4,7 @@ const Home = () => {
   const token = localStorage.getItem("token");
   return (
     <>
-      <Link to={token !== null ? "/main" : "/login?mode=init"}>hello</Link>
+      <Link to={"/login?mode=init"}>hello</Link>
     </>
   );
 };
