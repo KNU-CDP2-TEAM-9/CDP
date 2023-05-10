@@ -1,8 +1,8 @@
 const mysql = require("mysql2/promise");
 
 module.exports = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "my_db",
+  host: "cdp2db.cqngcvvrqot3.us-east-2.rds.amazonaws.com",
+  user: "admin",
+  password: "qwer1234",
+  database: "cdp",
 });
