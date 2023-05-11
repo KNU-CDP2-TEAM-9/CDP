@@ -34,7 +34,9 @@ const Side = (props) => {
               {curLocation !== item.chatId ? (
                 <ChatField chatId={item.chatId} curParam={curParam}></ChatField>
               ) : (
-                <p>{item.chatId}</p>
+                <div className={classes.onclick_chatId}>
+                  <p>{item.chatId}</p>
+                </div>
               )}
             </li>
           );

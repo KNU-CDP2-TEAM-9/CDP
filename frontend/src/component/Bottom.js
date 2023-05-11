@@ -46,20 +46,20 @@ const Bottom = (props) => {
       <div className={classes.wrapper}>
         {curParam !== "#userInfo" ? (
           <Link to="#userInfo" relative="path">
-            <div>userInfo</div>
+            <div className={classes.unclick_userInfo}>userInfo</div>
           </Link>
         ) : (
-          <div>userInfo</div>
+          <div className={classes.onclick_userInfo}>userInfo</div>
         )}
         {curParam !== "#memo" ? (
           <Link to="#memo" relative="path">
-            <div>Memo</div>
+            <div className={classes.unclick_memo}>Memo</div>
           </Link>
         ) : (
-          <div>Memo</div>
+          <div className={classes.onclick_memo}>Memo</div>
         )}
-        <div>
-          <button onClick={LogOutHandler}>LogOut</button>
+        <div className={classes.wrapper_logout}>
+          <button className={classes.button_logout} onClick={LogOutHandler}>LogOut</button>
         </div>
         {curParam === "#userInfo" && (
           <UserInfoForm
