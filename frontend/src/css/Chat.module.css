@@ -4,7 +4,7 @@
 
 .ulWrapper {
   height: 600px;
-  background-color: #b5d692;
+  background-color: #ffffff;
   overflow: auto;
 }
 
@@ -12,6 +12,9 @@
 }
 
 .item {
-  height: 100px;
-  border: 1px solid blue;
+  background-color: #ffe68d;
+  border: 1px solid #ffe68d;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
 }

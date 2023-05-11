@@ -1,9 +1,19 @@
 .wrapper {
   height: 1060px;
-  background-color: aqua;
+  background-color: #ffffff;
   overflow: scroll;
 }
+
 .item {
-  height: 100px;
-  border: 1px solid blue;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  /* border: 1px solid blue; */
+}
+
+.onclick_chatId {
+  line-height: 80px;
+  text-align: center;
+  height: 80px;
+  background-color: #eeeeee;
 }

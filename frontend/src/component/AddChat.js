@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import classes from "../css/AddChat.module.css";
 
 const AddChat = (props) => {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ const AddChat = (props) => {
     props.onAdd(resData);
   };
 
-  return <button onClick={SubmitHandler}>New Chat</button>;
+  return <button className={classes.button_newchat} onClick={SubmitHandler}>New Chat</button>;
 };
 
 export default AddChat;
