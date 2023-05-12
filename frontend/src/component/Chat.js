@@ -36,20 +36,25 @@ const Chat = (props) => {
         <ul className={classes.list}>
           {msgList.map((item, index) => {
             return item.isUser ? (
-              <li className={classes.item} key={index}>
-                {item.text}
-              </li>
+              <div className={classes.wrapper_question}>
+                <li className={classes.item_question} key={index}>
+                  {item.text}
+                </li>
+              </div>
             ) : (
-              <li className={classes.item} key={index}>
-                {item.text.split("\n").map((value, key) => {
-                  return (
-                    <div key={key}>
-                      {value}
-                      <br />
-                    </div>
-                  );
-                })}
-              </li>
+              <div className={classes.wrapper_answer}>
+                <li className={classes.item_answer} key={index}>
+                  {item.text.split("\n").map((value, key) => {
+                    return (
+                      <div key={key}>
+                        {value}
+                        <br />
+                      </div>
+                    );
+                  })}
+                </li>
+              </div>
+              
             );
           })}
         </ul>
