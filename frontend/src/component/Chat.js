@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import classes from "../css/Chat.module.css";
 import MessageForm from "./MessageForm";
+import BotMessage from "./BotMessage";
 
 const Chat = (props) => {
   const [msgList, setMsgList] = useState([]);
@@ -41,14 +42,11 @@ const Chat = (props) => {
               </li>
             ) : (
               <li className={classes.item} key={index}>
-                {item.text.split("\n").map((value, key) => {
-                  return (
-                    <div key={key}>
-                      {value}
-                      <br />
-                    </div>
-                  );
-                })}
+                <BotMessage
+                  text={item.text}
+                  onAdd={AddMsgHandler}
+                  onAddBot={AddBotHandler}
+                ></BotMessage>
               </li>
             );
           })}

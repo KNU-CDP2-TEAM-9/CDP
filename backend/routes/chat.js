@@ -29,6 +29,7 @@ router.post("/msg", async (req, res, next) => {
   connection.release();
 
   const neo4jList = await findAllNode();
+  neo4jList.sort((x, y) => x.length - y.length);
   let WordList = [];
   neo4jList.forEach((item) => {
     if (text.includes(item)) {
@@ -36,7 +37,22 @@ router.post("/msg", async (req, res, next) => {
     }
   });
 
-  BotText = await MakeSentence(WordList);
+  let BotText = "";
+
+  if (WordList.length === 0) {
+    BotText = "죄송합니다.";
+  } else {
+    for (let i = 0; i < WordList.length; i++) {
+      for (let j = i + 1; j < WordList.length; j++) {
+        if (WordList[j].includes(WordList[i])) {
+          WordList[i] = "";
+        }
+      }
+    }
+
+    WordList = WordList.filter((item) => item !== "");
+    BotText = await MakeSentence(WordList);
+  }
 
   sql = "insert into message set ?";
   const msg_bot = {
@@ -121,5 +137,7 @@ router.post("/:chatId", async (req, res, next) => {
     list: resList,
   });
 });
+
+router.post("/bot", (req, res, next) => {});
 
 module.exports = router;

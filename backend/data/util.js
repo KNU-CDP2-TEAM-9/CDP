@@ -1,18 +1,27 @@
 const { findResultNode } = require("./neo4j");
 
 const MakeSentence = async (list) => {
-  const strList = await Promise.all(
-    list.map((item) => {
-      const list = findResultNode(item);
-      return list;
-    })
-  );
-
-  const changeList = strList.map((item) => {
+  let pList = [];
+  let rList = [];
+  let SentenceList = [];
+  for (var i = 0; i < list.length; i++) {
+    const obj = await findResultNode(list[i]);
+    pList.push(obj.pathList);
+    rList.push(obj.relList);
+  }
+  console.log(pList, rList);
+  const changeList = pList.map((item) => {
     return item.join(" => ");
   });
+  SentenceList.push(changeList.join("*"));
 
-  const sentence = changeList.join("\n");
+  const changeList_2 = rList.map((item) => {
+    return item.join(">");
+  });
+
+  SentenceList.push(changeList_2.join(">"));
+
+  const sentence = SentenceList.join("/");
 
   return sentence;
 };
