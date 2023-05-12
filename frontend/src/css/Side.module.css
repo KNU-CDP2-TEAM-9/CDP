@@ -5,13 +5,14 @@
 }
 
 .item {
+  display:flex;
   height: 80px;
   line-height: 80px;
   text-align: center;
 }
 
 .onclick_chatId {
-  line-height: 80px;
+  line-height: 45px;
   text-align: center;
   height: 80px;
   background-color: #eeeeee;

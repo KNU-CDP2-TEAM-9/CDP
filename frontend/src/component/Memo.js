@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import MemoForm from "./MemoForm";
+import classes from "../css/memo.module.css";
 
 const Memo = (props) => {
   const [isWriteMode, setIsWriteMode] = useState(false);
@@ -38,7 +39,9 @@ const Memo = (props) => {
 
   return (
     <>
-      <button onClick={newMemoHandler}>New memo</button>
+      <button className={classes.button_newMemo} onClick={newMemoHandler}>
+        New memo
+      </button>
       {isWriteMode === true ? (
         <MemoForm
           onBack={backHandler}
