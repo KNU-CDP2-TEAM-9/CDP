@@ -10,7 +10,7 @@ button{
   color: #fff;
   background-color: #c7c7c7;
   border-radius: 10px;
-  padding: 2px 12px;
+  padding: 2px 15px;
 }
 
 .button_logout:hover {
@@ -18,19 +18,27 @@ button{
 }
 
 .unclick_userInfo {
-  padding: 3px 20px;
+  display: inline-block;
+  float: right;
+  padding: 3px 30px;
 }
 
 .onclick_userInfo {
+  display: inline-block;
+  float: right;
   background-color: #d8e5ff;
-  padding: 3px 20px;
+  padding: 3px 30px;
 }
 
 .unclick_memo {
-  padding: 3px 20px;
+  display: inline-block;
+  float: right;
+  padding: 3px 30px;
 }
 
 .onclick_memo {
+  display: inline-block;
+  float: right;
   background-color: #d8e5ff;
-  padding: 3px 20px;
+  padding: 3px 30px;
 }

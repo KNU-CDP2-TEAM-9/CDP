@@ -1,5 +1,6 @@
 .InputChat {
   position: relative;
-  width: 100%;
+  width: 90%;
+  margin-left: 40px;
   bottom: 0;
 }
