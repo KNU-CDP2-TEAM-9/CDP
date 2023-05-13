@@ -30,6 +30,7 @@ const MainRoot = () => {
     <div className={classes.wrapper}>
       <div className={classes.primary}>
         <Outlet></Outlet>
+        <div className={classes.icon_logo}></div>
       </div>
       <div className={classes.secondary}>
         <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
