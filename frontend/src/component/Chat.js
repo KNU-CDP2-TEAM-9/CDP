@@ -44,6 +44,7 @@ const Chat = (props) => {
             ) : (
               <div className={classes.wrapper_answer}>
                 <li className={classes.item_answer} key={index}>
+                  
                   {item.text.split("\n").map((value, key) => {
                     return (
                       <div key={key}>

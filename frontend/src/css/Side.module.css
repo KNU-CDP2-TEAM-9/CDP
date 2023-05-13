@@ -1,18 +1,29 @@
 .wrapper {
-  height: 1060px;
+  /* height: 1060px; */
+  height: 600px;
   background-color: #ffffff;
   overflow: scroll;
 }
+.wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 10px;
+}
+.wrapper::-webkit-scrollbar-track {
+  background-color: #fff;
+}
 
 .item {
-  display:flex;
+  display:block;
   height: 80px;
   line-height: 80px;
   text-align: center;
 }
 
 .onclick_chatId {
-  line-height: 45px;
+  line-height: 80px;
   text-align: center;
   height: 80px;
   background-color: #eeeeee;
