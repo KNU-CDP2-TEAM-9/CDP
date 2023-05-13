@@ -19,9 +19,9 @@ button{
 
 
 .button_logout {
-  
   color: #fff;
   background-color: #c7c7c7;
+  font-weight: bold;
   border-radius: 10px;
   padding: 2px 15px;
 }
@@ -33,12 +33,14 @@ button{
 .unclick_userInfo {
   display: inline-block;
   float: right;
+  font-weight: bold;
   padding: 3px 30px;
 }
 
 .onclick_userInfo {
   display: inline-block;
   float: right;
+  font-weight: bold;
   background-color: #d8e5ff;
   padding: 3px 30px;
 }
@@ -46,12 +48,14 @@ button{
 .unclick_memo {
   display: inline-block;
   float: right;
+  font-weight: bold;
   padding: 3px 30px;
 }
 
 .onclick_memo {
   display: inline-block;
   float: right;
+  font-weight: bold;
   background-color: #d8e5ff;
   padding: 3px 30px;
 }
