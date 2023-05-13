@@ -7,6 +7,7 @@ import MainIdPage from "./pages/MainIdPage";
 import MainRoot from "./pages/MainRoot";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import GraphPage from "./pages/GraphPage";
 import { loader as mainLoader } from "./pages/MainRoot";
 import { loader as chatLoader } from "./pages/MainIdPage";
 import { action as loginAction } from "./pages/LoginPage";
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     id: "root",
     children: [
       { index: true, element: <HomePage /> },
+      { path: "graph", element: <GraphPage></GraphPage> },
       { path: "login", element: <LoginPage></LoginPage>, action: loginAction },
       {
         path: "signup",

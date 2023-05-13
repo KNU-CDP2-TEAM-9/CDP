@@ -5,6 +5,8 @@ const Home = () => {
   return (
     <>
       <Link to={"/login?mode=init"}>hello</Link>
+      <br />
+      <Link to={"/graph"}>graph</Link>
     </>
   );
 };

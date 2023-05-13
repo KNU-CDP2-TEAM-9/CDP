@@ -144,5 +144,65 @@ const findResultNode = async (target) => {
   return result;
 };
 
+const GraphData = async () => {
+  const driver = Driver();
+  let result = [];
+  try {
+    result = await printAllSession();
+  } catch (error) {
+    console.error(`Something went wrong: ${error}`);
+  } finally {
+    await driver.close();
+  }
+
+  async function printAllSession() {
+    let list = [];
+    let rList = [];
+    const session = driver.session({ database: "neo4j" });
+    try {
+      const query = `MATCH p=()-[]->() RETURN p`;
+      const readResult = await session.executeRead((tx) => tx.run(query));
+      readResult.records.forEach((record) => {
+        list.push({
+          data: {
+            name: record.get("p").segments[0].start.properties.Name,
+            id: record.get("p").segments[0].relationship.startNodeElementId,
+          },
+        });
+        list.push({
+          data: {
+            name: record.get("p").segments[0].end.properties.Name,
+            id: record.get("p").segments[0].relationship.endNodeElementId,
+          },
+        });
+        list.push({
+          data: {
+            name: record.get("p").segments[0].relationship.type,
+            id: record.get("p").segments[0].relationship.elementId,
+            source: record.get("p").segments[0].relationship.startNodeElementId,
+            target: record.get("p").segments[0].relationship.endNodeElementId,
+          },
+        });
+      });
+      rList = list.filter((character, idx, arr) => {
+        return (
+          arr.findIndex((item) => item.data.id === character.data.id) === idx
+        );
+      });
+    } catch (error) {
+      console.error(`Something went wrong: ${error}`);
+    } finally {
+      await session.close();
+    }
+    return rList;
+  }
+  return result;
+};
+
+GraphData().then((result) => {
+  console.log(result.length);
+});
+
 exports.findResultNode = findResultNode;
 exports.findAllNode = findAllNode;
+exports.GraphData = GraphData;
