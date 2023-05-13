@@ -3,7 +3,7 @@
 }
 
 .ulWrapper {
-  height: 600px;
+  height: 800px;
   background-color: #ffffff;
   overflow: auto;
 }
@@ -12,7 +12,7 @@
   width: 10px;
 }
 .ulWrapper::-webkit-scrollbar-thumb {
-  background-color: #eeeeee;
+  background-color: #c7c7c7;
   border-radius: 10px;
 }
 .ulWrapper::-webkit-scrollbar-track {
