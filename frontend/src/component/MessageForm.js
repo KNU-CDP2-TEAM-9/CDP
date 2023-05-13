@@ -44,6 +44,7 @@ const MessageForm = (props) => {
         <input
           className={classes.InputChat}
           type="text"
+          placeholder="원하시는 정보를 키워드 위주로 입력하여 주세요"
           value={msgText}
           onChange={msgTextHandler}
         ></input>
