@@ -40,7 +40,8 @@ const Memo = (props) => {
   return (
     <>
       <button className={classes.button_newMemo} onClick={newMemoHandler}>
-        New memo
+        <div className={classes.icon_plus}></div>
+        <div className={classes.text_plus}>New memo</div>
       </button>
       {isWriteMode === true ? (
         <MemoForm
