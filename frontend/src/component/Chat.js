@@ -43,6 +43,7 @@ const Chat = (props) => {
               </div>
             ) : (
               <div className={classes.wrapper_answer}>
+                <div className={classes.icon_answer}></div>
                 <li className={classes.item_answer} key={index}>
                   
                   {item.text.split("\n").map((value, key) => {

@@ -4,6 +4,7 @@ button{
 .wrapper {
   height: 350px;
   background-color: #ffffff;
+  padding-left: 35px;
   overflow: scroll;
 }
 .wrapper::-webkit-scrollbar {

@@ -41,7 +41,7 @@
   max-width: calc(100% - 200px);
   padding: 15px 20px;
   margin-right: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   border-radius: 10px;
   background-color: #eeeeee;
 }
@@ -59,12 +59,21 @@
   color: #ffe68d;
 } */
 
+.icon_answer {
+  width: 50px;
+  height: 70px;
+  background-image: url("../img/hobanu.png");
+  background-size: 50px 70px;
+  margin-right: 30px;
+}
+
 .item_answer {
   position: relative;
   display: inline-block;
   max-width: calc(100% - 200px);
   padding: 15px 20px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   border-radius: 10px;
   background-color: #ffe68d;
 }
