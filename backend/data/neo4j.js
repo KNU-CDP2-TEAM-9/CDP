@@ -43,12 +43,19 @@ const findResultNode = async (target) => {
   const driver = Driver();
   let pathList = [];
   let relList = [];
+  let NodeQuery = "";
+  let NodeText = "";
   let result = {};
   try {
     pathList = await printPathSession(target);
     relList = await printChildSession(target);
+    NodeQuery = await printQuerySession(target);
+    NodeText = await printTextSession(target);
     result.pathList = pathList;
     result.relList = relList;
+    result.NodeQuery = NodeQuery;
+    result.NodeText = NodeText;
+    console.log(result);
   } catch (error) {
     console.error(`Something went wrong: ${error}`);
   } finally {
@@ -93,6 +100,46 @@ const findResultNode = async (target) => {
       await session.close();
     }
     return list;
+  }
+
+  async function printQuerySession(target) {
+    let q = "";
+    const session = driver.session({ database: "neo4j" });
+    try {
+      // 쿼리
+      const query = `match (n:노드 {Name: $target}) return n`;
+      const readResult = await session.executeRead((tx) =>
+        tx.run(query, { target })
+      );
+      readResult.records.forEach((record) => {
+        q = record.get("n").properties.Q;
+      });
+    } catch (error) {
+      console.error(`Something went wrong: ${error}`);
+    } finally {
+      await session.close();
+    }
+    return q;
+  }
+
+  async function printTextSession(target) {
+    let text = "";
+    const session = driver.session({ database: "neo4j" });
+    try {
+      // 쿼리
+      const query = `match (n:노드 {Name: $target}) return n`;
+      const readResult = await session.executeRead((tx) =>
+        tx.run(query, { target })
+      );
+      readResult.records.forEach((record) => {
+        text = record.get("n").properties.Text;
+      });
+    } catch (error) {
+      console.error(`Something went wrong: ${error}`);
+    } finally {
+      await session.close();
+    }
+    return text;
   }
   return result;
 };

@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 const BotMessage = (props) => {
+  const navigate = useNavigate();
   const ClickHandler = async (event) => {
     event.preventDefault();
+    const msgText = event.target.textContent;
     props.onAdd(msgText);
     const token = localStorage.getItem("token");
     const msgInfo = {
@@ -21,8 +25,6 @@ const BotMessage = (props) => {
       navigate("/login?mode=error", { replace: true });
     }
 
-    setMsgText("");
-
     const BotText = resData.BotText.text;
 
     props.onAddBot(BotText);
@@ -31,12 +33,16 @@ const BotMessage = (props) => {
   const str = props.text;
   const str1 = str.split("/")[0];
   const str2 = str.split("/")[1];
+  const str3 = str.split("/")[2];
+  const str4 = str.split("/")[3];
   const list1 = (str1 || "").split("*");
   const list2 = (str2 || "").split(">");
+  const list3 = (str3 || "").split("*");
+  const list4 = (str4 || "").split("*");
   const path = list1.map((item) => {
     return (
       <>
-        {item}
+        <div>{item}</div>
         <br />
       </>
     );
@@ -44,7 +50,23 @@ const BotMessage = (props) => {
   const child = list2.map((item) => {
     return (
       <>
-        {item}
+        <div onClick={ClickHandler}>{item}</div>
+        <br />
+      </>
+    );
+  });
+  const text = list3.map((item) => {
+    return (
+      <>
+        <div>{item}</div>
+        <br />
+      </>
+    );
+  });
+  const question = list4.map((item) => {
+    return (
+      <>
+        <div onClick={ClickHandler}>{item}</div>
         <br />
       </>
     );
@@ -53,8 +75,9 @@ const BotMessage = (props) => {
   return (
     <>
       <div>{path}</div>
-      <br />
       <div>{child}</div>
+      <div>{text}</div>
+      <div>{question}</div>
     </>
   );
 };

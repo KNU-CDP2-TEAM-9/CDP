@@ -46,6 +46,7 @@ const Chat = (props) => {
                   text={item.text}
                   onAdd={AddMsgHandler}
                   onAddBot={AddBotHandler}
+                  chatId={props.chatId}
                 ></BotMessage>
               </li>
             );
