@@ -22,27 +22,34 @@ const LoginForm = () => {
   return (
     <>
       <Form method="post">
-        <h1>Login</h1>
-        {data && data.errors && (
-          <ul>
-            {Object.values(data.errors).map((err) => {
-              return <li key={err}>{err}</li>;
-            })}
-          </ul>
-        )}
-        <p>
-          <label htmlFor="email">Email</label>
-          <input id="email" type="text" name="email" required />
-        </p>
-        <p>
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" required />
-        </p>
-        <div>
-          <Link to="/signup">Create new User</Link>
-          <button disabled={isSubmitting}>
-            {isSubmitting ? "Submitting ..." : "Save"}
-          </button>
+        {/* <h1>Login</h1> */}
+        <div className={classes.wrapper_login}>
+          <div className={classes.img_logo}></div>
+          {data && data.errors && (
+            <ul>
+              {Object.values(data.errors).map((err) => {
+                return <li key={err}>{err}</li>;
+              })}
+            </ul>
+          )}
+          <p>
+            {/* <label className={classes.label_email} htmlFor="email">Email</label> */}
+            <input className={classes.input_email} 
+              placeholder="email"
+              id="email" type="text" name="email" required />
+          </p>
+          <p>
+            {/* <label className={classes.label_pw} htmlFor="password">Password</label> */}
+            <input className={classes.input_pw} 
+              placeholder="password"
+              id="password" type="password" name="password" required />
+          </p>
+          <div>
+            <button className={classes.btn_login} disabled={isSubmitting}>
+              {isSubmitting ? "Submitting ..." : "Login"}
+            </button>
+            <Link className={classes.link_new} to="/signup">Create new User</Link>
+          </div>
         </div>
       </Form>
     </>
