@@ -20,6 +20,10 @@ button{
     background-size: 222px 74.25px;
 }
 
+.wrapper_input {
+    margin: 5px;
+}
+
 .input_email {
     margin:auto;
     display:block;

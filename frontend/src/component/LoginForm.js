@@ -32,13 +32,13 @@ const LoginForm = () => {
               })}
             </ul>
           )}
-          <p>
+          <p className={classes.wrapper_input}>
             {/* <label className={classes.label_email} htmlFor="email">Email</label> */}
             <input className={classes.input_email} 
               placeholder="email"
               id="email" type="text" name="email" required />
           </p>
-          <p>
+          <p className={classes.wrapper_input}>
             {/* <label className={classes.label_pw} htmlFor="password">Password</label> */}
             <input className={classes.input_pw} 
               placeholder="password"
