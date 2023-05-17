@@ -8,8 +8,18 @@
 button{
     background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer}
 
+p {
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
 .button_newMemo {
     position: relative;
+    margin-top: 20px;
 }
 
 .icon_plus {
@@ -29,5 +39,17 @@ button{
     top: 50%;
     margin-top: -13px;
     font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.text_memo {
+    display: inline-block;
+    margin-right: 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.text_date {
+    display: inline-block;
+    color: #7f7f7f;
     font-family: 'Noto Sans KR', sans-serif;
 }
