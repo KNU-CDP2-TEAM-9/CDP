@@ -1,7 +1,7 @@
 CREATE(knu:Node:KyungpookUniversity{ Name: "경북대학교", Text : "", Q : "" })
 CREATE(knupia:Node:App{ Name: "KNUPIA", Text : "", Q : "" })
 CREATE(knuin:Node:Site{ Name: "통합정보시스템", Text : "", Q : "" })
-CREATE(sugang:Node:Site{ Name: "수강신청사이트", Text : "", Q : "" })
+CREATE(sugang:Node:Site{ Name: "수강신청사이트", Text : "https://sugang.knu.ac.kr/login.knu", Q : "" })
 CREATE(학사행정:Node:Divide{ Name: "학사행정", Text : "", Q : "" })
 CREATE(knu) - [:다음경로]->(knuin)
 CREATE(knu) - [:다음경로]->(sugang)
@@ -30,13 +30,15 @@ CREATE(휴학:Node:Details{ Name: "휴학", Text : "졸업전까지 휴학할 �
 ", Q: ""})
 CREATE(복학신청 :Node:Divide {Name: "복학신청", Text : "", Q : ""})
 CREATE(자퇴신청 :Node:Divide {Name: "자퇴신청", Text : "", Q : ""})
-CREATE(전과원서접수 :Node:Divide {Name: "전과원서접수", Text : "2학년 이상 진급 예정자 중 재학생 또는 복학 예정자, 평균학점 2.5이상", Q : ""})
+CREATE(전과원서접수 :Node:Divide {Name: "전과원서접수", Text : "", Q : "전과 조건은 무엇인가요?"})
+CREATE(전과조건 :Node:Divide {Name: "전과 조건", Text : "2학년 이상 진급 예정자 중 재학생 또는 복학 예정자, 평균학점 2.5이상", Q : ""})
 CREATE(학적) - [:다음경로]->(학적변동관리)
 CREATE(학적변동관리) - [:다음경로]->(휴학신청)
 CREATE(휴학신청) - [:다음경로]->(휴학)
 CREATE(학적변동관리) - [:다음경로]->(복학신청)
 CREATE(학적변동관리) - [:다음경로]->(자퇴신청)
 CREATE(학적변동관리) - [:다음경로]->(전과원서접수)
+CREATE(전과원서접수) - [:다음경로]->(전과조건)
 
 
 
@@ -162,7 +164,7 @@ CREATE(수업) - [:다음경로]->(수업진행관리)
 CREATE(수업진행관리) - [:다음경로]->(공적출석인정신청)
 
 
-CREATE(수강꾸러미:Node:Leaf {Name: "수강꾸러미", Text : "", Q : ""})
+CREATE(수강꾸러미:Node:Leaf {Name: "수강꾸러미", Text : "", Q : "수강신청사이트 주소를 알려주세요"})
 CREATE(온라인수강신청:Node:Leaf {Name: "온라인수강신청", Text : "", Q : ""})
 CREATE(sugang) - [:다음경로]->(수강꾸러미)
 CREATE(sugang) - [:다음경로]->(온라인수강신청)
@@ -334,22 +336,6 @@ CREATE(학생의료비관리) - [:다음경로]->(건강검진확인서출력신
 
 CREATE(장학) - [:세부사항]->(장학금종류)
 CREATE(장학) - [:세부사항]->(장학기본원칙)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
