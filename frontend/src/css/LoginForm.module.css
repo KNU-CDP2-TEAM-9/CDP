@@ -53,4 +53,6 @@ button{
     font-weight: bold;
     padding: 10px;
     color: #ffcc29;
+    text-decoration-line: underline;
+    text-decoration-color: #ffcc29;
 }
