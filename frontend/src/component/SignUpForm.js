@@ -19,19 +19,19 @@ const SignUpForm = () => {
               })}
             </ul>
           )}
-          <p>
+          <p className={classes.wrapper_input}>
             {/* <label htmlFor="email">Email</label> */}
             <input className={classes.input_email} 
               placeholder="email"
               id="email" type="text" name="email" required />
           </p>
-          <p>
+          <p className={classes.wrapper_input}>
             {/* <label htmlFor="password">Password</label> */}
             <input className={classes.input_pw} 
               placeholder="password" 
               id="password"type="password" name="password" required />
           </p>
-          <p>
+          <p className={classes.wrapper_input}>
             {/* <label htmlFor="nickName">nickName</label> */}
             <input className={classes.input_nick} 
               placeholder="nickName" 
