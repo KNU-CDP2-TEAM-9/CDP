@@ -22,8 +22,8 @@ const LoginForm = () => {
   return (
     <>
       <Form method="post">
-        {/* <h1>Login</h1> */}
         <div className={classes.wrapper_login}>
+          {/* <h1>Login</h1> */}
           <div className={classes.img_logo}></div>
           {data && data.errors && (
             <ul>
@@ -48,7 +48,9 @@ const LoginForm = () => {
             <button className={classes.btn_login} disabled={isSubmitting}>
               {isSubmitting ? "Submitting ..." : "Login"}
             </button>
-            <Link className={classes.link_new} to="/signup">Create new User</Link>
+            <Link to="/signup">
+              <div className={classes.link_new}>Create new User</div>
+              </Link>
           </div>
         </div>
       </Form>
