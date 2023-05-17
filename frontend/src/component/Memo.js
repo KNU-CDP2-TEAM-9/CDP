@@ -59,9 +59,16 @@ const Memo = (props) => {
         <ul>
           {props.memoList.map((item) => {
             return (
-              <li id={item.memoId} onClick={modifyHandler} key={item.memoId}>
-                {item.memoText} , {item.writeDate}
-              </li>
+              <div className={classes.wrapper_memo}>
+                <p className={classes.text_memo}
+                  id={item.memoId} onClick={modifyHandler} key={item.memoId}>
+                  {item.memoText}
+                </p>
+                <p className={classes.text_date}>
+                  {item.writeDate}
+                </p>
+              </div>
+              
             );
           })}
         </ul>
