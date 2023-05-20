@@ -5,34 +5,23 @@
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
 
-.wrapper {
-  /* height: 1060px; */
-  height: 600px;
-  background-color: #ffffff;
-  overflow: scroll;
-}
-.wrapper::-webkit-scrollbar {
-  width: 10px;
-}
-.wrapper::-webkit-scrollbar-thumb {
-  background-color: #c7c7c7;
-  border-radius: 10px;
-}
-.wrapper::-webkit-scrollbar-track {
-  background-color: #fff;
-}
+button{
+    background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer}
 
-.item {
-  display:block;
-  height: 70px;
-  line-height: 70px;
-  text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;
-}
+.button_newchat {
+    width: 115px;
+    margin: auto;
+    display: block;
+    color: #fff;
+    font-size: 15px;
+    background-color: #5690ff;
+    border-radius: 15px;
+    padding: 3px 20px;
+    margin-top: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
 
-.onclick_chatId {
-  line-height: 70px;
-  text-align: center;
-  height: 70px;
-  background-color: #eeeeee;
-}
+  .button_newchat:hover {
+    background-color: #266df0;
+  }
+  

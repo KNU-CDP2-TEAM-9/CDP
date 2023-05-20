@@ -31,52 +31,76 @@ const BotMessage = (props) => {
   };
 
   const str = props.text;
-  const str1 = str.split("/")[0];
-  const str2 = str.split("/")[1];
-  const str3 = str.split("/")[2];
-  const str4 = str.split("/")[3];
+  const str1 = str.split(";")[0];
+  const str2 = str.split(";")[1];
+  const str3 = str.split(";")[2];
+  const str4 = str.split(";")[3];
   const list1 = (str1 || "").split("*");
   const list2 = (str2 || "").split(">");
-  const list3 = (str3 || "").split("*");
-  const list4 = (str4 || "").split("*");
+  const list3 = (str3 || "").split("|");
+  const list4 = (str4 || "").split("|");
+
   const path = list1.map((item) => {
     return (
       <>
         <div>{item}</div>
-        <br />
       </>
     );
   });
-  const child = list2.map((item) => {
-    return (
-      <>
-        <div onClick={ClickHandler}>{item}</div>
-        <br />
-      </>
-    );
-  });
-  const text = list3.map((item) => {
-    return (
-      <>
-        <div>{item}</div>
-        <br />
-      </>
-    );
-  });
-  const question = list4.map((item) => {
-    return (
-      <>
-        <div onClick={ClickHandler}>{item}</div>
-        <br />
-      </>
-    );
-  });
+  const child =
+    list2[0] !== ""
+      ? list2.map((item) => {
+          return (
+            <>
+              <div onClick={ClickHandler}>{item}</div>
+            </>
+          );
+        })
+      : [];
+
+  const text =
+    list3[0] !== ""
+      ? list3.map((item) => {
+          const sp = item.split("-");
+          return (
+            <>
+              <div>
+                {sp.map((item) => {
+                  return <div>{item}</div>;
+                })}
+              </div>
+              <br></br>
+            </>
+          );
+        })
+      : [];
+  console.log(text);
+  const question =
+    list4[0] !== ""
+      ? list4.map((item) => {
+          const sp = item.split("*");
+          return (
+            <>
+              <div>
+                {sp.map((item) => {
+                  return <div onClick={ClickHandler}>{item}</div>;
+                })}
+              </div>
+              <br></br>
+            </>
+          );
+        })
+      : [];
 
   return (
     <>
+      {path.length !== 0 ? <div>경로입니다.</div> : <div></div>}
       <div>{path}</div>
+      {child.length !== 0 ? <div>추가 정보입니다.</div> : <div></div>}
       <div>{child}</div>
+      {text.length !== 0 ? <div>상세 정보입니다.</div> : <div></div>}
       <div>{text}</div>
+      {question.length !== 0 ? <div>추가 질문입니다.</div> : <div></div>}
       <div>{question}</div>
     </>
   );

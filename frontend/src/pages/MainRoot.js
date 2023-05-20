@@ -30,6 +30,15 @@ const MainRoot = () => {
     <div className={classes.wrapper}>
       <div className={classes.primary}>
         <Outlet></Outlet>
+        <div className={classes.icon_logo}></div>
+      </div>
+      <div className={classes.secondary}>
+        <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+          <Await resolve={chatList}>
+            {(loadedList) => <Side list={loadedList} />}
+          </Await>
+        </Suspense>
+
         <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
           <Await resolve={{ userInfo, memo }}>
             {(loadedObject) => (
@@ -38,13 +47,6 @@ const MainRoot = () => {
                 memo={loadedObject.memo}
               />
             )}
-          </Await>
-        </Suspense>
-      </div>
-      <div className={classes.secondary}>
-        <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
-          <Await resolve={chatList}>
-            {(loadedList) => <Side list={loadedList} />}
           </Await>
         </Suspense>
       </div>

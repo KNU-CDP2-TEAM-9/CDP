@@ -52,6 +52,7 @@ router.post("/msg", async (req, res, next) => {
 
     WordList = WordList.filter((item) => item !== "");
     BotText = await MakeSentence(WordList);
+    console.log(BotText);
   }
 
   sql = "insert into message set ?";

@@ -1,1 +1,465 @@
-코드 작성
+CREATE(knu:Node:KyungpookUniversity{ Name: "경북대학교", Text : "", Q : "" })
+CREATE(knupia:Node:App{ Name: "KNUPIA", Text : "", Q : "" })
+CREATE(knuin:Node:Site{ Name: "통합정보시스템", Text : "", Q : "" })
+CREATE(sugang:Node:Site{ Name: "수강신청사이트", Text : "https://sugang.knu.ac.kr/login.knu", Q : "" })
+CREATE(학사행정:Node:Divide{ Name: "학사행정", Text : "", Q : "" })
+CREATE(knu) - [:다음경로]->(knuin)
+CREATE(knu) - [:다음경로]->(sugang)
+CREATE(knu) - [:다음경로]->(knupia)
+CREATE(knuin) - [:다음경로]->(학사행정)
+
+CREATE(학적:Node:Divide{ Name: "학적", Text : "", Q : "" })
+CREATE(학사행정) - [:다음경로]->(학적)
+CREATE(학적정보관리:Node:Divide{ Name: "학적정보관리", Text : "", Q : "" })
+CREATE(학적기본사항관리:Node:Divide{ Name: "학적기본사항관리", Text : "", Q : "" })
+CREATE(개인정보변경:Node:Divide{ Name: "개인정보변경", Text : "", Q : "" })
+CREATE(개인정보변경신청:Node:Divide{ Name: "개인정보변경신청", Text : "", Q : "" })
+CREATE(학적기재사항정정신청:Node:Divide{ Name: "학적기재사항정정신청", Text : "", Q : "" })
+CREATE(학적) - [:다음경로]->(학적정보관리)
+CREATE(학적정보관리) - [:다음경로]->(학적기본사항관리)
+CREATE(학적정보관리) - [:다음경로]->(개인정보변경)
+CREATE(학적정보관리) - [:다음경로]->(개인정보변경신청)
+CREATE(학적정보관리) - [:다음경로]->(학적기재사항정정신청)
+
+CREATE(학적변동관리:Node:Divide{ Name: "학적변동관리", Text : "", Q : "전과지원자격은 무엇인가요?" })
+CREATE(휴학신청:Node:Divide{ Name: "휴학신청", Text : "", Q : "휴학의 자세한 정보를 알고싶어요" })
+CREATE(휴학:Node:Details{ Name: "휴학", Text : "졸업전까지 휴학할 수 있는 총 학기수 : 학사 과정 6학기 (예과 및 학사편입자 3학기, 특례편입자 4학기), 석사 과정 4학기, 박사 과정 6학기
+                 군휴학신청->제출 서류 : 군입영통지서(군입대 후에는 군복무확인서)
+                 질병휴학신청->제출 서류 : 진단서(4주 이상) 1부
+                 육아휴학신청->제출 서류 : 임신, 출산, 육아를 확인할 수 있는 서류 1부
+", Q: ""})
+CREATE(복학신청 :Node:Divide {Name: "복학신청", Text : "", Q : ""})
+CREATE(자퇴신청 :Node:Divide {Name: "자퇴신청", Text : "", Q : ""})
+CREATE(전과원서접수 :Node:Divide {Name: "전과원서접수", Text : "", Q : "전과 조건은 무엇인가요?"})
+CREATE(전과조건 :Node:Divide {Name: "전과 조건", Text : "2학년 이상 진급 예정자 중 재학생 또는 복학 예정자, 평균학점 2.5이상", Q : ""})
+CREATE(학적) - [:다음경로]->(학적변동관리)
+CREATE(학적변동관리) - [:다음경로]->(휴학신청)
+CREATE(휴학신청) - [:다음경로]->(휴학)
+CREATE(학적변동관리) - [:다음경로]->(복학신청)
+CREATE(학적변동관리) - [:다음경로]->(자퇴신청)
+CREATE(학적변동관리) - [:다음경로]->(전과원서접수)
+CREATE(전과원서접수) - [:다음경로]->(전과조건)
+
+
+
+
+CREATE(다전공관리:Node:Divide {Name: "다전공관리", Text : "", Q : ""})
+CREATE(복수전공신청:Node:Divide {Name: "복수전공신청", Text : "", Q : ""})
+CREATE(복수전공이수포기신청:Node:Divide {Name: "복수전공이수포기신청", Text : "", Q : ""})
+CREATE(부전공신청:Node:Divide {Name: "부전공신청", Text : "", Q : ""})
+CREATE(연계전공신청:Node:Divide {Name: "연계전공신청", Text : "", Q : ""})
+CREATE(융합전공신청:Node:Divide {Name: "융합전공신청", Text : "", Q : ""})
+CREATE(연계융합전공이수포기신청:Node:Divide {Name: "연계융합전공이수포기신청", Text : "", Q : ""})
+CREATE(학적) - [:다음경로]->(다전공관리)
+CREATE(다전공관리) - [:다음경로]->(복수전공신청)
+CREATE(다전공관리) - [:다음경로]->(복수전공이수포기신청)
+CREATE(다전공관리) - [:다음경로]->(부전공신청)
+CREATE(다전공관리) - [:다음경로]->(연계전공신청)
+CREATE(다전공관리) - [:다음경로]->(융합전공신청)
+CREATE(다전공관리) - [:다음경로]->(연계융합전공이수포기신청)
+
+CREATE(졸업:Node:Divide {Name: "졸업", Text : "", Q : "조기졸업에 대해서 알고싶어요"})
+CREATE(학사행정) - [:다음경로]->(졸업)
+CREATE(졸업예정자관리:Node:Divide {Name: "졸업예정자관리", Text : "", Q : ""})
+CREATE(조기졸업신청:Node:Divide {Name: "조기졸업신청", Text : "", Q : ""})
+CREATE(조기졸업:Node:Details {Name: "조기졸업", Text : "1. 등록학기가 6학기 이상인 학생(수업연한 최대 1년까지 단축 가능)
+2. 평점평균이 3.7이상인 학생(4.3만점, 2014학년도 1학기부터 성적은 F학점 포함)만 신청가능 합니다.
+3. 학과에서 확인전에 취소하고자 할 경우에는[신청취소]로 취소하시기 바랍니다.
+4. 신청 후 승인단계를 확인할 수 있습니다.
+※성적증명서를 필수로 첨부하여 주세요", Q: ""})
+CREATE(학사학위취득유예신청 :Node:Divide {Name: "학사학위취득유예신청", Text : "", Q : ""})
+CREATE(졸업인정:Node:Divide {Name: "졸업인정", Text : "", Q : ""})
+CREATE(졸업자격인정신청:Node:Divide {Name: "졸업자격인정신청", Text : "", Q : ""})
+CREATE(컴퓨터학부:Node:Department {Name: "컴퓨터학부", Text : "", Q : ""})
+CREATE(졸업자격인정신청) - [:다음경로]->(컴퓨터학부)
+CREATE(졸업요건:Node:Details {Name: "졸업요건", Text : "", Q : "졸업포트폴리오는 어떤 항목이 들어가나요?"})
+CREATE(컴퓨터학부) - [:다음경로]->(졸업요건)
+CREATE(프로그램:Node:Details {Name: "프로그램", Text : "", Q : "2012학번~2020학번 프로그램은 무엇인가요?*2021학번~ 프로그램은 무엇인가요?"})
+CREATE(필수과목:Node:Details {Name: "필수과목", Text : "", Q : "2022학번 필수과목은 무엇인가요?*2020학번~2021학번 필수과목은 무엇인가요?"})
+CREATE(졸업요건) - [:다음경로]->(프로그램)
+CREATE(졸업요건) - [:다음경로]->(필수과목)
+CREATE(이공이공학번프로그램:Node:Details {Name: "2012학번~2020학번 프로그램", Text : "- 총 이수학점 : 150학점
+        - ABEEK - 기본 소양 : 15학점(외국어 제외)
+                - 전공 기반 : 21학점
+                - 공학 전공 : 75학점(설계 14학점)
+        - ABEEK 이수학점 : 111학점
+        - 영어 성적 : 토익 기준 700점 이상
+        - 현장 실습 : 3학점 이상", Q: ""})
+CREATE(이공이일학번프로그램 :Node:Details {Name: "2021학번~ 프로그램", Text : "- 총 이수학점 : 140학점
+        - ABEEK - 기본 소양 : 15학점(외국어 제외)
+                - 전공 기반 : 18학점
+                - 공학 전공 : 60학점(설계 14학점)
+        - ABEEK 이수학점 : 93학점
+        - 영어 성적 : 토익 기준 700점 이상
+        - 현장 실습 : 3학점 이상", Q: ""})
+CREATE(프로그램) - [:다음경로]->(이공이공학번프로그램)
+CREATE(프로그램) - [:다음경로]->(이공이일학번프로그램)
+CREATE(이공이이학번필수과목 :Node:Details {Name: "2022학번 필수과목", Text : "- 전공기반 : 수학1(CLTR0211), 물리학(CLTR0213), 이산수학(COME0301)
+        - 공학전공 : 프로그래밍기초(COMP0204), 기초창의공학설계(COMP0205), 자바프로그래밍(COMP0217), 자료구조(COME0331), 컴퓨터구조(COMP0411), 시스템프로그래밍(ELEC0462), 운영체제(COMP0312), 알고리즘(COMP0319), 종합설계프로젝트1(ITEC0401), 종합설계프로젝트(ITEC0402)", Q: ""})
+CREATE(이공이공학번필수과목 :Node:Details {Name: "2020학번~2021학번 필수과목", Text : "- 전공기반 : 수학1(CLTR0211), 물리학1(CLTR0213), 이산수학(COME0301)
+        - 공학전공 : 프로그래밍기초(COMP0204), 기초창의공학설계(COMP0205), 자바프로그래밍(COMP0217), 자료구조(COME0331), 컴퓨터구조(COMP0411), 시스템프로그래밍(ELEC0462), 운영체제(COMP0312), 알고리즘2(COMP0319), 종합설계프로젝트1(ITEC0401), 종합설계프로젝트(ITEC0402)", Q: ""})
+CREATE(필수과목) - [:다음경로]->(이공이이학번필수과목)
+CREATE(필수과목) - [:다음경로]->(이공이공학번필수과목)
+CREATE(졸업포트폴리오 :Node:Details {Name: "졸업포트폴리오", Text : "- 개인정보 : 이력서, 자기소개서 등
+        - 해외인턴 : 결과보고서
+        - 현장실습 : 인재개발원 발급
+        - 봉사활동 참여 : 확인증
+        - 동아리 활동 : 동아리 활동 증명서
+        - 지도교수 상담내역 : 매학기 1회 권장
+        - 세미나 / 특강 참여 : 관련 에세이, 사진, 수료증
+        - 수상 / 장학금 : 상장사본 / 장학내역
+        - 자격증 : 사본
+        - 공인외국어성적 : KEESS필히 등록 후 승인요청
+        - 설계포트폴리오 : 종합설계프로젝트 1,2 포함(강의계획서, 강의자료, 설계수행 관련 발표자료 및 보고서,프로젝트 진행 관련 자료, 프로젝트 작품 결과 화면(필수)) ", Q: ""})
+CREATE(졸업요건) - [:다음경로]->(졸업포트폴리오)
+CREATE(졸업) - [:다음경로]->(졸업예정자관리)
+CREATE(졸업예정자관리) - [:다음경로]->(조기졸업신청)
+CREATE(조기졸업신청) - [:다음경로]->(조기졸업)
+CREATE(졸업예정자관리) - [:다음경로]->(학사학위취득유예신청)
+CREATE(졸업) - [:다음경로]->(졸업인정)
+CREATE(졸업인정) - [:다음경로]->(졸업자격인정신청)
+
+CREATE(교직:Node:Divide {Name: "교직", Text : "", Q : ""})
+CREATE(학사행정) - [:다음경로]->(교직)
+CREATE(자격이수관리:Node:Divide {Name: "자격이수관리", Text : "", Q : ""})
+CREATE(교직과정이수신청:Node:Divide {Name: "교직과정이수신청", Text : "", Q : ""})
+CREATE(교원자격무시험검정:Node:Divide {Name: "교원자격무시험검정", Text : "", Q : ""})
+CREATE(교원자격무시험검정신청:Node:Divide {Name: "교원자격무시험검정신청", Text : "", Q : ""})
+CREATE(교직적성및인성검사관리:Node:Divide {Name: "교직적성및인성검사관리", Text : "", Q : ""})
+CREATE(교직적성및인성검사신청:Node:Divide {Name: "교직적성및인성검사신청", Text : "", Q : ""})
+CREATE(교직적성및인성검사결과조회:Node:Divide {Name: "교직적성및인성검사결과조회", Text : "", Q : ""})
+CREATE(응급처치및심폐소생술실습:Node:Divide {Name: "응급처치및심폐소생술실습", Text : "", Q : ""})
+CREATE(응급처치및심폐소생술실습신청:Node:Divide {Name: "응급처치및심폐소생술실습신청", Text : "", Q : ""})
+CREATE(응급처치및심폐소생술실습결과조회:Node:Divide {Name: "응급처치및심폐소생술실습결과조회", Text : "", Q : ""})
+CREATE(성인지교육:Node:Divide {Name: "성인지교육", Text : "", Q : ""})
+CREATE(성인지교육신청:Node:Divide {Name: "성인지교육신청", Text : "", Q : ""})
+CREATE(성인지교육결과조회:Node:Divide {Name: "성인지교육결과조회", Text : "", Q : ""})
+CREATE(교육봉사활동관리:Node:Divide {Name: "교육봉사활동관리", Text : "", Q : ""})
+CREATE(교육봉사활동입력:Node:Divide {Name: "교육봉사활동입력", Text : "", Q : ""})
+CREATE(교직) - [:다음경로]->(자격이수관리)
+CREATE(자격이수관리) - [:다음경로]->(교직과정이수신청)
+CREATE(교직) - [:다음경로]->(교원자격무시험검정)
+CREATE(교원자격무시험검정) - [:다음경로]->(교원자격무시험검정신청)
+CREATE(교직) - [:다음경로]->(교직적성및인성검사관리)
+CREATE(교직적성및인성검사관리) - [:다음경로]->(교직적성및인성검사신청)
+CREATE(교직적성및인성검사관리) - [:다음경로]->(교직적성및인성검사결과조회)
+CREATE(교직) - [:다음경로]->(응급처치및심폐소생술실습)
+CREATE(응급처치및심폐소생술실습) - [:다음경로]->(응급처치및심폐소생술실습신청)
+CREATE(응급처치및심폐소생술실습) - [:다음경로]->(응급처치및심폐소생술실습결과조회)
+CREATE(교직) - [:다음경로]->(성인지교육)
+CREATE(성인지교육) - [:다음경로]->(성인지교육신청)
+CREATE(성인지교육) - [:다음경로]->(성인지교육결과조회)
+CREATE(교직) - [:다음경로]->(교육봉사활동관리)
+CREATE(교육봉사활동관리) - [:다음경로]->(교육봉사활동입력)
+
+CREATE(수업:Node:Divide {Name: "수업", Text : "", Q : ""})
+CREATE(학사행정) - [:다음경로]->(수업)
+CREATE(강의계획서및시간표관리:Node:Divide {Name: "강의계획서및시간표관리", Text : "", Q : ""})
+CREATE(수업시간표및강의계획서조회:Node:Divide {Name: "수업시간표및강의계획서조회", Text : "", Q : ""})
+CREATE(수업진행관리:Node:Divide {Name: "수업진행관리", Text : "", Q : ""})
+CREATE(공적출석인정신청:Node:Divide {Name: "공적출석인정신청", Text : "", Q : ""})
+CREATE(수업) - [:다음경로]->(강의계획서및시간표관리)
+CREATE(강의계획서및시간표관리) - [:다음경로]->(수업시간표및강의계획서조회)
+CREATE(수업) - [:다음경로]->(수업진행관리)
+CREATE(수업진행관리) - [:다음경로]->(공적출석인정신청)
+
+
+CREATE(수강꾸러미:Node:Leaf {Name: "수강꾸러미", Text : "", Q : "수강신청사이트 주소를 알려주세요"})
+CREATE(온라인수강신청:Node:Leaf {Name: "온라인수강신청", Text : "", Q : ""})
+CREATE(sugang) - [:다음경로]->(수강꾸러미)
+CREATE(sugang) - [:다음경로]->(온라인수강신청)
+
+
+
+
+CREATE(수강:Node:Divide {Name: "수강", Text : "", Q : ""})
+CREATE(수강신청:Node:Divide {Name: "수강신청", Text : "", Q : ""})
+CREATE(수강정원변경원신청:Node:Divide {Name: "수강정원변경원신청", Text : "", Q : ""})
+CREATE(수강취소신청:Node:Divide {Name: "수강취소신청", Text : "", Q : ""})
+CREATE(수강정정신청:Node:Divide {Name: "수강정정신청", Text : "", Q : ""})
+CREATE(개설강좌수요조사:Node:Divide {Name: "개설강좌수요조사", Text : "", Q : ""})
+CREATE(수강꾸러미신청과목조회:Node:Divide {Name: "수강꾸러미신청과목조회", Text : "", Q : ""})
+CREATE(수강신청신청과목조회:Node:Divide {Name: "수강신청신청과목조회", Text : "", Q : ""})
+CREATE(시간표조회:Node:Divide {Name: "시간표조회", Text : "", Q : ""})
+CREATE(수강가능학점조회:Node:Divide {Name: "수강가능학점조회", Text : "", Q : ""})
+
+CREATE(수업강의평가:Node:Divide {Name: "수업강의평가", Text : "", Q : ""})
+
+CREATE(학사행정) - [:다음경로]->(수업강의평가)
+CREATE(학사행정) - [:다음경로]->(수강)
+CREATE(수강) - [:다음경로]->(수강신청)
+CREATE(수강신청) - [:다음경로]->(수강정원변경원신청)
+CREATE(수강신청) - [:다음경로]->(수강취소신청)
+CREATE(수강신청) - [:다음경로]->(수강정정신청)
+CREATE(수강신청) - [:다음경로]->(개설강좌수요조사)
+CREATE(수강신청) - [:다음경로]->(수강꾸러미신청과목조회)
+CREATE(수강신청) - [:다음경로]->(수강신청신청과목조회)
+CREATE(수강신청) - [:다음경로]->(시간표조회)
+CREATE(수강신청) - [:다음경로]->(수강가능학점조회)
+
+CREATE(학생지원:Node:Divide {Name: "학생지원", Text : "", Q : ""})
+CREATE(학생증발급관리:Node:Divide {Name: "학생증발급관리", Text : "", Q : ""})
+CREATE(학생증발급신청:Node:Divide {Name: "학생증발급신청", Text : "", Q : ""})
+CREATE(국제학생증발급신청:Node:Divide {Name: "국제학생증발급신청", Text : "", Q : ""})
+CREATE(국제학생증신청:Node:Divide {Name: "국제학생증신청", Text : "", Q : ""})
+CREATE(ISIC국제학생증:Node:Site {Name: "ISIC국제학생증", Text : "", Q : ""})
+CREATE(카드형학생증발급신청:Node:Divide {Name: "카드형학생증발급신청", Text : "", Q : ""})
+CREATE(DGB대구은행:Node:App {Name: "DGB대구은행", Text : "", Q : ""})
+CREATE(서비스:Node:Divide {Name: "서비스", Text : "", Q : ""})
+CREATE(학생증신청:Node:Divide {Name: "학생증신청", Text : "", Q : ""})
+CREATE(은행방문수령:Node:Divide {Name: "은행방문수령", Text : "", Q : ""})
+CREATE(카드형학생증:Node:Leaf {Name: "카드형학생증", Text : "", Q : ""})
+CREATE(모바일학생증신청:Node:Divide {Name: "모바일학생증신청", Text : "", Q : ""})
+CREATE(모바일학생증:Node:Leaf {Name: "모바일학생증", Text : "", Q : ""})
+CREATE(국내교류학생관리:Node:Divide {Name: "국내교류학생관리", Text : "", Q : ""})
+CREATE(타대학수학신청:Node:Divide {Name: "타대학수학신청", Text : "", Q : ""})
+CREATE(예비군대원관리:Node:Divide {Name: "예비군대원관리", Text : "", Q : ""})
+CREATE(예비군대원신고:Node:Divide {Name: "예비군대원신고", Text : "", Q : ""})
+CREATE(장애학생정보:Node:Divide {Name: "장애학생정보", Text : "", Q : ""})
+CREATE(장애학생지원신청:Node:Divide {Name: "장애학생지원신청", Text : "", Q : ""})
+CREATE(장애학생교육활동지원사업:Node:Divide {Name: "장애학생교육활동지원사업", Text : "", Q : ""})
+CREATE(교육지원인력활동신청:Node:Divide {Name: "교육지원인력활동신청", Text : "", Q : ""})
+CREATE(출근부입력:Node:Divide {Name: "출근부입력", Text : "", Q : ""})
+CREATE(출근부승인:Node:Divide {Name: "출근부승인", Text : "", Q : ""})
+CREATE(현장실습:Node:Divide {Name: "현장실습", Text : "", Q : ""})
+CREATE(이수실적증명서:Node:Divide {Name: "이수실적증명서", Text : "", Q : ""})
+
+CREATE(학사행정) - [:다음경로]->(학생지원)
+CREATE(학생지원) - [:다음경로]->(학생증발급관리)
+CREATE(학생증발급관리) - [:다음경로]->(학생증발급신청)
+CREATE(학생증발급관리) - [:다음경로]->(국제학생증발급신청)
+CREATE(국제학생증발급신청) - [:다음경로]->(국제학생증신청)
+CREATE(국제학생증신청) - [:다음경로]->(ISIC국제학생증)
+CREATE(학생증발급신청) - [:다음경로]->(카드형학생증발급신청)
+CREATE(카드형학생증발급신청) - [:다음경로]->(DGB대구은행)
+CREATE(DGB대구은행) - [:다음경로]->(서비스)
+CREATE(서비스) - [:다음경로]->(학생증신청)
+CREATE(학생증신청) - [:다음경로]->(은행방문수령)
+CREATE(은행방문수령) - [:다음경로]->(카드형학생증)
+CREATE(knupia) - [:다음경로]->(모바일학생증신청)
+CREATE(모바일학생증신청) - [:다음경로]->(모바일학생증)
+
+CREATE(학생지원) - [:다음경로]->(국내교류학생관리)
+CREATE(국내교류학생관리) - [:다음경로]->(타대학수학신청)
+CREATE(학생지원) - [:다음경로]->(예비군대원관리)
+CREATE(예비군대원관리) - [:다음경로]->(예비군대원신고)
+CREATE(학생지원) - [:다음경로]->(장애학생정보)
+CREATE(장애학생정보) - [:다음경로]->(장애학생지원신청)
+CREATE(학생지원) - [:다음경로]->(장애학생교육활동지원사업)
+CREATE(장애학생교육활동지원사업) - [:다음경로]->(교육지원인력활동신청)
+CREATE(장애학생교육활동지원사업) - [:다음경로]->(출근부입력)
+CREATE(장애학생교육활동지원사업) - [:다음경로]->(출근부승인)
+CREATE(학생지원) - [:다음경로]->(현장실습)
+CREATE(현장실습) - [:다음경로]->(이수실적증명서)
+
+
+CREATE(장학:Node:Divide {Name: "장학", Text : "", Q : "장학 기본 원칙에 대해서 알고싶어요*장학금 종류에 대해서 알고싶어요"})
+CREATE(계좌관리:Node:Divide {Name: "계좌관리", Text : "", Q : ""})
+CREATE(계좌입력:Node:Divide {Name: "계좌입력", Text : "", Q : ""})
+CREATE(본부우선선발장학:Node:Divide {Name: "본부우선선발장학", Text : "", Q : ""})
+CREATE(본부우선선발장학대상자장학금신청:Node:Divide {Name: "본부우선선발장학대상자장학금신청", Text : "", Q : ""})
+CREATE(학생신청장학:Node:Divide {Name: "학생신청장학", Text : "", Q : ""})
+CREATE(장학금신청서:Node:Divide {Name: "장학금신청서", Text : "", Q : ""})
+CREATE(교내봉사장학:Node:Divide {Name: "교내봉사장학", Text : "", Q : ""})
+CREATE(교내봉사장학신청:Node:Divide {Name: "교내봉사장학신청", Text : "", Q : ""})
+CREATE(교내봉사장학근무보고일지작성:Node:Divide {Name: "교내봉사장학근무보고일지작성", Text : "", Q : ""})
+CREATE(튜터장학:Node:Divide {Name: "튜터장학", Text : "", Q : ""})
+CREATE(튜터개설신청:Node:Divide {Name: "튜터개설신청", Text : "", Q : ""})
+CREATE(과외희망수강신청:Node:Divide {Name: "과외희망수강신청", Text : "", Q : ""})
+CREATE(튜터봉사활동증명서:Node:Divide {Name: "튜터봉사활동증명서", Text : "", Q : ""})
+CREATE(증명서관리:Node:Divide {Name: "증명서관리", Text : "", Q : ""})
+CREATE(장학수혜증명서출력:Node:Divide {Name: "장학수혜증명서출력", Text : "", Q : ""})
+CREATE(장학수혜증명서조회:Node:Leaf {Name: "장학수혜증명서조회", Text : "", Q : ""})
+CREATE(장학비수혜증명서출력:Node:Divide {Name: "장학비수혜증명서출력", Text : "", Q : ""})
+CREATE(장학비수혜증명서조회:Node:Leaf {Name: "장학비수혜증명서조회", Text : "", Q : ""})
+CREATE(학생의료비관리:Node:Divide {Name: "학생의료비관리", Text : "", Q : ""})
+CREATE(의료공제신청:Node:Divide {Name: "의료공제신청", Text : "", Q : ""})
+CREATE(건강검진확인서출력신청:Node:Divide {Name: "건강검진확인서출력신청", Text : "", Q : ""})
+
+CREATE(장학기본원칙:Node:Moreinformation {
+    Name: "장학 기본 원칙",
+    Text : "1. 학자금 초과수혜 (중복지원) 금지 
+- 장학금 및 학자금 대출은 해당 학기 등록금 범위를 초과하여 수혜(중복지원)할 수 없음.
+- 장학금 간 중복지원 : 중복지원 금액(초과 금액)만큼 장학금 반환.
+- 학자금 대출과 장학금 중복지원 : 중복지원 금액만큼 학자금 대출 상환.
+* 예외사항 - 학자금, 근로장학금, 1회성 포상 성격의 상금 등 생활비 지원 성격의 장학금
+2. 근로장학금동시수혜금지
+- 동일 학기에 2가지 이상 근로장학 동시 수혜 금지.
+* 예외사항 - 봉사장학금
+3. 이수학점및성적기준
+- 교내 성적우수 장학금 : 직전학기 12학점 이상 이수, 성적 3.0 / 4.3 이상.
+- 국가장학금 : 직전학기 6학점 이상(졸업학기 제외), 성적 2.4 / 4.3 이상.
+4. 장학생제외자
+- 수업연한초과자, 휴학자, 제적자, 학사학위취득유예자.
+- 학칙에 의한 징계(근신,정학)를 받은 자, 허위로 장학금을 신청한 자, 기타 품행이 현저저히 불량하거나 학생 본분을 현저히 위반한 자.
+* 예외사항 - 국가장학금의 경우 등록 휴학생, 수업연한초과자 수혜 가능 횟수 범위 내에서 수혜 가능",
+    Q : ""})
+
+CREATE(장학금종류:Node:Moreinformation {
+    Name: "장학금 종류",
+    Text : "1. 교내장학금
+    - 성적우수 장학금 : KNU + 인재장학금, 도전 장학금, 성적우수 장학금, 우수 외국인 장학금
+    - 가계곤란 장학금 : 비전장학금, 나눔장학금, 희망장학금, 장학사정관 장학금
+    - 근로 장학금 : 교내근로 장학금, 대학 청소년 교육지원 장학금, 다문화 탈북학생 멘토링 장학금, 학부생 튜터링, 교육조교(TA), 연구조교(RA), 기관 자체 근로장학금
+    - 봉사 장학금 : 해외봉사 장학금, 재능봉사, 학생회 활동 장학금, 봉사 장학금
+    - 기타 장학금 : 국가유공자 본인, 국가유공자 자녀, 광주민주화 자녀, 디딤돌 장학금, 해외 교환학생, 교류학생, 학장추천 장학금, 연계과정 장학금, 학업지원 장학금, 인재원·연습림 지역 자녀, 체육특기자, 다문화가정 장학금, 해외인턴십 장학
+
+2. 교외장학금
+    - 한국장학재단 장학금
+    - 정부기관 장학금
+    - 교외장학·발전기금 장학금
+    - (재)경북대학교 장학회 장학금",
+    Q: ""})
+
+CREATE(학사행정) - [:다음경로]->(장학)
+CREATE(장학) - [:다음경로]->(계좌관리)
+CREATE(계좌관리) - [:다음경로]->(계좌입력)
+CREATE(장학) - [:다음경로]->(본부우선선발장학)
+CREATE(본부우선선발장학) - [:다음경로]->(본부우선선발장학대상자장학금신청)
+CREATE(장학) - [:다음경로]->(학생신청장학)
+CREATE(학생신청장학) - [:다음경로]->(장학금신청서)
+CREATE(장학) - [:다음경로]->(교내봉사장학)
+CREATE(교내봉사장학) - [:다음경로]->(교내봉사장학신청)
+CREATE(교내봉사장학) - [:다음경로]->(교내봉사장학근무보고일지작성)
+CREATE(장학) - [:다음경로]->(튜터장학)
+CREATE(튜터장학) - [:다음경로]->(튜터개설신청)
+CREATE(튜터장학) - [:다음경로]->(과외희망수강신청)
+CREATE(튜터장학) - [:다음경로]->(튜터봉사활동증명서)
+CREATE(장학) - [:다음경로]->(증명서관리)
+CREATE(증명서관리) - [:다음경로]->(장학수혜증명서출력)
+CREATE(장학수혜증명서출력) - [:다음경로]->(장학수혜증명서조회)
+CREATE(증명서관리) - [:다음경로]->(장학비수혜증명서출력)
+CREATE(장학비수혜증명서출력) - [:다음경로]->(장학비수혜증명서조회)
+CREATE(장학) - [:다음경로]->(학생의료비관리)
+CREATE(학생의료비관리) - [:다음경로]->(의료공제신청)
+CREATE(학생의료비관리) - [:다음경로]->(건강검진확인서출력신청)
+
+CREATE(장학) - [:세부사항]->(장학금종류)
+CREATE(장학) - [:세부사항]->(장학기본원칙)
+
+
+
+
+
+CREATE(국제교류:Node:Divide {Name: "국제교류", Text : "", Q : ""})
+CREATE(국제교류학생관리:Node:Divide {Name: "국제교류학생관리", Text : "", Q : ""})
+CREATE(외국대학교환학생신청:Node:Divide {이름: "외국대학교환학생신청", Text : "", Q : ""})
+CREATE(`외국대학교환학생신청 - 상세`:Node:Divide {Name: "외국대학교환학생신청-상세", Text : "", Q : ""})
+CREATE(복수학위신청:Node:Divide {Name: "복수학위신청", Text : "", Q : ""})
+CREATE(`복수학위신청 - 상세`:Node:Divide {Name: "복수학위신청-상세", Text : "", Q : ""})
+CREATE(계절제단기교환학생신청:Node:Divide {Name: "계절제단기교환학생신청", Text : "", Q : ""})
+CREATE(`계절제단기교환학생신청 - 상세`:Node:Divide {Name: "계절제단기교환학생신청-상세", Text : "", Q : ""})
+CREATE(개별어학연수신청:Node:Divide {Name: "개별어학연수신청", Text : "", Q : ""})
+CREATE(국제화프로그램설문조사:Node:Divide {Name: "국제화프로그램설문조사", Text : "", Q : ""})
+CREATE(학사행정) - [:다음경로]->(국제교류)
+CREATE(국제교류) - [:다음경로]->(국제교류학생관리)
+CREATE(국제교류학생관리) - [:다음경로]->(외국대학교환학생신청)
+CREATE(국제교류학생관리) - [:다음경로]->(`외국대학교환학생신청 - 상세`)
+CREATE(국제교류학생관리) - [:다음경로]->(복수학위신청)
+CREATE(국제교류학생관리) - [:다음경로]->(`복수학위신청 - 상세`)
+CREATE(국제교류학생관리) - [:다음경로]->(계절제단기교환학생신청)
+CREATE(국제교류학생관리) - [:다음경로]->(`계절제단기교환학생신청 - 상세`)
+CREATE(국제교류학생관리) - [:다음경로]->(개별어학연수신청)
+CREATE(국제교류학생관리) - [:다음경로]->(국제화프로그램설문조사)
+
+
+CREATE(성적:Node:Divide {Name: "성적", Text : "", Q : ""})
+CREATE(학기성적:Node:Divide {Name: "학기성적", Text : "", Q : ""})
+CREATE(이수성적조회:Node:Divide {Name: "이수성적조회", Text : "", Q : ""})
+CREATE(이수성적:Node:Leaf {Name: "이수성적", Text : "", Q : ""})
+CREATE(기타성적:Node:Divide {Name: "기타성적", Text : "", Q : ""})
+CREATE(`기타성적 학점인정 신청(해외교환, 해외복수)`:Node:Divide {Name: "기타성적 학점인정 신청(해외교환, 해외복수)", Text : "", Q : ""})
+CREATE(`기타성적 학점인정 신청(개별어학연수)`:Node:Divide {Name: "기타성적 학점인정 신청(개별어학연수)", Text : "", Q : ""})
+CREATE(`기타성적 학점인정 신청(비교과글로벌리더십)`:Node:Divide {Name: "기타성적 학점인정 신청(비교과글로벌리더십)", Text : "", Q : ""})
+CREATE(교과구분관리:Node:Divide {Name: "교과구분관리", Text : "", Q : ""})
+CREATE(`증명성적 교과구분 변경 신청`:Node:Divide {Name: "증명성적 교과구분 변경 신청", Text : "", Q : ""})
+CREATE(학사행정) - [:다음경로]->(성적)
+CREATE(성적) - [:다음경로]->(학기성적)
+CREATE(학기성적) - [:다음경로]->(이수성적조회)
+CREATE(이수성적조회) - [:다음경로]->(이수성적)
+CREATE(성적) - [:다음경로]->(기타성적)
+CREATE(기타성적) - [:다음경로]->(`기타성적 학점인정 신청(해외교환, 해외복수)`)
+CREATE(기타성적) - [:다음경로]->(`기타성적 학점인정 신청(개별어학연수)`)
+CREATE(기타성적) - [:다음경로]->(`기타성적 학점인정 신청(비교과글로벌리더십)`)
+CREATE(성적) - [:다음경로]->(교과구분관리)
+CREATE(교과구분관리) - [:다음경로]->(`증명성적 교과구분 변경 신청`)
+
+
+CREATE(등록:Node:Divide {Name: "등록", Text : "", Q : ""})
+CREATE(등록금관리:Node:Divide {Name: "등록금관리", Text : "", Q : ""})
+CREATE(고지서조회:Node:Divide {Name: "고지서조회", Text : "", Q : ""})
+CREATE(납입확인서:Node:Divide {Name: "납입확인서", Text : "", Q : ""})
+CREATE(차등납부신청:Node:Divide {Name: "차등납부신청", Text : "", Q : ""})
+CREATE(분납신청:Node:Divide {Name: "분납신청", Text : "", Q : ""})
+CREATE(계절학기수강료관리:Node:Divide {Name: "계절학기수강료관리", Text : "", Q : ""})
+CREATE(계절학기고지서:Node:Divide {Name: "계절학기고지서", Text : "", Q : ""})
+CREATE(학사행정) - [:다음경로]->(등록)
+CREATE(등록) - [:다음경로]->(등록금관리)
+CREATE(등록금관리) - [:다음경로]->(고지서조회)
+CREATE(등록금관리) - [:다음경로]->(납입확인서)
+CREATE(등록금관리) - [:다음경로]->(분납신청)
+CREATE(등록금관리) - [:다음경로]->(차등납부신청)
+CREATE(등록) - [:다음경로]->(계절학기수강료관리)
+CREATE(계절학기수강료관리) - [:다음경로]->(계절학기고지서)
+
+
+CREATE(공학인증:Node:Divide {Name: "공학인증", Text : "", Q : ""})
+CREATE(학생개인정보:Node:Divide {Name: "학생개인정보", Text : "", Q : ""})
+CREATE(학생생활부:Node:Divide {Name: "학생생활부", Text : "", Q : ""})
+CREATE(`(학생용)개인정보입력확인`:Node:Divide {Name: "(학생용)개인정보입력확인", Text : "", Q : ""})
+CREATE(자기소개서:Node:Divide {Name: "자기소개서", Text : "", Q : ""})
+CREATE(`학생수강 및 비교과활동`:Node:Divide {Name: "학생수강 및 비교과활동", Text : "", Q : ""})
+CREATE(`(학생용)시간표조회`:Node:Divide {Name: "(학생용)시간표조회", Text : "", Q : ""})
+CREATE(수강정보조회:Node:Divide {Name: "수강정보조회", Text : "", Q : ""})
+CREATE(`(학생용)당해학기 개설교과목 현황`:Node:Divide {Name: "(학생용)당해학기 개설교과목 현황", Text : "", Q : ""})
+CREATE(`비교과 활동`:Node:Divide {Name: "비교과 활동", Text : "", Q : ""})
+CREATE(`수강교과목 명세표`:Node:Divide {Name: "수강교과목 명세표", Text : "", Q : ""})
+CREATE(`성적 및 수강신청현황`:Node:Divide {Name: "성적 및 수강신청현황", Text : "", Q : ""})
+CREATE(`수강신청 이수예상학점`:Node:Divide {Name: "수강신청 이수예상학점", Text : "", Q : ""})
+CREATE(`졸업학점 대비 이수학점`:Node:Leaf {Name: "졸업학점 대비 이수학점", Text : "", Q : ""})
+CREATE(`수강신청 이수예상학점`) - [:다음경로]->(`졸업학점 대비 이수학점`)
+CREATE(`학기별 성적현황`:Node:Divide {Name: "학기별 성적현황", Text : "", Q : ""})
+CREATE(`학기별 성적`:Node:Leaf {Name: "학기별 성적", Text : "", Q : ""})
+CREATE(`학기별 성적현황`) - [:다음경로]->(`학기별 성적`)
+CREATE(설문조사:Node:Divide {Name: "설문조사", Text : "", Q : ""})
+CREATE(학업성취도:Node:Divide {Name: "학업성취도", Text : "", Q : ""})
+CREATE(성적표:Node:Divide {Name: "성적표", Text : "", Q : ""})
+CREATE(`전 학기 성적표`:Node:Leaf {Name: "전 학기 성적표", Text : "", Q : ""})
+CREATE(성적표) - [:다음경로]->(`전 학기 성적표`)
+CREATE(포기신청:Node:Divide {Name: "포기신청", Text : "", Q : ""})
+CREATE(공학인증포기신청:Node:Divide {Name: "공학인증포기신청", Text : "", Q : ""})
+CREATE(공학인증게시판:Node:Divide {Name: "공학인증게시판", Text : "", Q : ""})
+CREATE(수업게시판메인:Node:Divide {Name: "수업게시판메인", Text : "", Q : ""})
+CREATE(학사행정) - [:다음경로]->(공학인증)
+CREATE(공학인증) - [:다음경로]->(학생개인정보)
+CREATE(학생개인정보) - [:다음경로]->(학생생활부)
+CREATE(학생개인정보) - [:다음경로]->(`(학생용)개인정보입력확인`)
+CREATE(학생개인정보) - [:다음경로]->(자기소개서)
+CREATE(공학인증) - [:다음경로]->(`학생수강 및 비교과활동`)
+CREATE(`학생수강 및 비교과활동`) - [:다음경로]->(`(학생용)시간표조회`)
+CREATE(`학생수강 및 비교과활동`) - [:다음경로]->(수강정보조회)
+CREATE(`학생수강 및 비교과활동`) - [:다음경로]->(`(학생용)당해학기 개설교과목 현황`)
+CREATE(`학생수강 및 비교과활동`) - [:다음경로]->(`비교과 활동`)
+CREATE(`학생수강 및 비교과활동`) - [:다음경로]->(`수강교과목 명세표`)
+CREATE(공학인증) - [:다음경로]->(`성적 및 수강신청현황`)
+CREATE(`성적 및 수강신청현황`) - [:다음경로]->(`수강신청 이수예상학점`)
+CREATE(`성적 및 수강신청현황`) - [:다음경로]->(`학기별 성적현황`)
+CREATE(`성적 및 수강신청현황`) - [:다음경로]->(설문조사)
+CREATE(공학인증) - [:다음경로]->(학업성취도)
+CREATE(학업성취도) - [:다음경로]->(성적표)
+CREATE(공학인증) - [:다음경로]->(포기신청)
+CREATE(포기신청) - [:다음경로]->(공학인증포기신청)
+CREATE(공학인증) - [:다음경로]->(공학인증게시판)
+CREATE(공학인증게시판) - [:다음경로]->(수업게시판메인)
+CREATE(`성적 상세정보`:Node:Moreinformation { Name: "성적 상세정보",Text : "전학기 성적표-수강 완료한 이전 학기의 모든 과목의 점수를 한화면에서 보기 편하게 확인할 수 있다.
+학기별 성적 - 학기별 취득학점과 각 학기의 평균 학점을 알려주며 기본소양 / 전공기반 / 공학전공 / 설계과목 / 교직과목의 항목으로 나누어 각각의 항목에 해당하는 이수학점을 확인할 수 있다.
+졸업학점 대비 이수학점 - 현재 수강중인 과목을 포함하여 기본소양 / 전공기반 / 공학전공 / 설계과목의 항목으로 나누어 각각의 항목의 졸업기준 / 이수학점을 나타내어 준다.
+이수성적 - 조그만 화면으로 확인하는데 불편함은 있지만 전체성적을 알려주며 각 학기별의 이수학점 성적 평균 평점 평균등을 알려준다.간략하게 성적을 확인할 시 활용하면 좋은 페이지이다.
+", Q: ""})
+CREATE(`학기별 성적`) - [:다음경로]->(`성적 상세정보`)
+CREATE(`전 학기 성적표`) - [:다음경로]->(`성적 상세정보`)
+CREATE(`졸업학점 대비 이수학점`) - [:다음경로]->(`성적 상세정보`)
+CREATE(이수성적) - [:다음경로]->(`성적 상세정보`)
+
+CREATE(전과원서접수) - [:다음경로]->(이수성적조회)
+

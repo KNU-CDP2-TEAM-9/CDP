@@ -37,18 +37,23 @@ const Chat = (props) => {
         <ul className={classes.list}>
           {msgList.map((item, index) => {
             return item.isUser ? (
-              <li className={classes.item} key={index}>
-                {item.text}
-              </li>
+              <div className={classes.wrapper_question}>
+                <li className={classes.item_question} key={index}>
+                  {item.text}
+                </li>
+              </div>
             ) : (
-              <li className={classes.item} key={index}>
-                <BotMessage
-                  text={item.text}
-                  onAdd={AddMsgHandler}
-                  onAddBot={AddBotHandler}
-                  chatId={props.chatId}
-                ></BotMessage>
-              </li>
+              <div className={classes.wrapper_answer}>
+                <div className={classes.icon_answer}></div>
+                <li className={classes.item_answer} key={index}>
+                  <BotMessage
+                    text={item.text}
+                    onAdd={AddMsgHandler}
+                    onAddBot={AddBotHandler}
+                    chatId={props.chatId}
+                  ></BotMessage>
+                </li>
+              </div>
             );
           })}
         </ul>

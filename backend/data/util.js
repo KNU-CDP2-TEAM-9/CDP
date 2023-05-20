@@ -13,7 +13,6 @@ const MakeSentence = async (list) => {
     tList.push(obj.NodeText);
     qList.push(obj.NodeQuery);
   }
-  console.log(pList, rList);
   const changeList = pList.map((item) => {
     return item.join(" => ");
   });
@@ -24,11 +23,12 @@ const MakeSentence = async (list) => {
   });
 
   SentenceList.push(changeList_2.join(">"));
-
-  SentenceList.push(tList.join("*"));
-  SentenceList.push(qList.join("*"));
+  console.log(qList);
+  SentenceList.push(tList.join("|"));
+  SentenceList.push(qList.join("|"));
   // 0 -> path 1 -> rel 2 -> NodeText 3 -> NodeQuery
-  const sentence = SentenceList.join("/");
+  const sentence = SentenceList.join(";");
+  console.log(sentence);
 
   return sentence;
 };
