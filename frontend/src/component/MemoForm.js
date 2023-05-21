@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import classes from "../css/MemoForm.module.css";
 const MemoForm = (props) => {
   const [memoText, setMemoText] = useState("");
   const navigate = useNavigate();
@@ -68,12 +68,16 @@ const MemoForm = (props) => {
   return (
     <>
       <form action="#" id="newMemo" onSubmit={SubmitHandler}>
-        <input
-          type="text"
+        <textarea
+          className={classes.Text}
           name="memo"
           value={memoText || ""}
           onChange={memoTextHandler}
-        ></input>
+          maxLength="2000"
+        ></textarea>
+        <button className={classes.Button} form="newMemo">
+          Submit
+        </button>
       </form>
     </>
   );

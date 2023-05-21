@@ -86,7 +86,7 @@ router.post("/chatList", async (req, res, next) => {
   const sql = "select * from chat where userId = ?";
   const [results] = await connection.query(sql, [userId]);
   const resList = results.map((item) => {
-    return { userId: item.userId, chatId: item.chatId };
+    return { userId: item.userId, chatId: item.chatId, addTime: item.addTime };
   });
   connection.release();
   res.status(201).json({
@@ -98,16 +98,24 @@ router.patch("/chatAdd", async (req, res, next) => {
   const connection = await mysql.getConnection(async (conn) => conn);
   const data = req.body;
   const userId = decode(data.token).userId;
-  console.log(userId);
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const date = String(now.getDate()).padStart(2, "0");
+  const hour = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  const sec = String(now.getSeconds()).padStart(2, "0");
+  const addTime = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
   const chatId = generateId();
   const sql = "insert into chat set ?";
-  const chat = { userId: userId, chatId: chatId };
+  const chat = { userId: userId, chatId: chatId, addTime: addTime };
   await connection.query(sql, [chat]);
   connection.release();
 
   return res.status(201).json({
     userId: chat.userId,
     chatId: chat.chatId,
+    addTime: chat.addTime,
   });
 });
 

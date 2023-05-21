@@ -52,11 +52,15 @@ const UserInfoForm = (props) => {
   };
   return (
     <>
-    <div className={classes.wrapper}>
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>nickName</div>
+      <div className={classes.wrapper}>
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>nickName</div>
           {isEditing.nickName === false ? (
-            <div className={classes.text_info} id="nickName" onClick={ClickHandler}>
+            <div
+              className={classes.text_info}
+              id="nickName"
+              onClick={ClickHandler}
+            >
               {props.userInfo.nickName ? props.userInfo.nickName : "----"}
             </div>
           ) : (
@@ -69,12 +73,16 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>firstName</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>firstName</div>
           {isEditing.firstName === false ? (
-            <div className={classes.text_info}  id="firstName" onClick={ClickHandler}>
+            <div
+              className={classes.text_info}
+              id="firstName"
+              onClick={ClickHandler}
+            >
               {props.userInfo.firstName ? props.userInfo.firstName : "----"}
             </div>
           ) : (
@@ -87,12 +95,16 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>lastName</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>lastName</div>
           {isEditing.lastName === false ? (
-            <div className={classes.text_info}  id="lastName" onClick={ClickHandler}>
+            <div
+              className={classes.text_info}
+              id="lastName"
+              onClick={ClickHandler}
+            >
               {props.userInfo.lastName ? props.userInfo.lastName : "----"}
             </div>
           ) : (
@@ -105,12 +117,12 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>dept</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>dept</div>
           {isEditing.dept === false ? (
-            <div className={classes.text_info}  id="dept" onClick={ClickHandler}>
+            <div className={classes.text_info} id="dept" onClick={ClickHandler}>
               {props.userInfo.dept ? props.userInfo.dept : "----"}
             </div>
           ) : (
@@ -123,12 +135,16 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>phoneNumber</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>phoneNumber</div>
           {isEditing.phoneNumber === false ? (
-            <div className={classes.text_info}  id="phoneNumber" onClick={ClickHandler}>
+            <div
+              className={classes.text_info}
+              id="phoneNumber"
+              onClick={ClickHandler}
+            >
               {props.userInfo.phoneNumber ? props.userInfo.phoneNumber : "----"}
             </div>
           ) : (
@@ -141,12 +157,16 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>grade</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>grade</div>
           {isEditing.grade === false ? (
-            <div className={classes.text_info}  id="grade" onClick={ClickHandler}>
+            <div
+              className={classes.text_info}
+              id="grade"
+              onClick={ClickHandler}
+            >
               {props.userInfo.grade ? props.userInfo.grade : "----"}
             </div>
           ) : (
@@ -159,13 +179,19 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>earned_credit</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>earned_credit</div>
           {isEditing.earned_credit === false ? (
-            <div className={classes.text_info}  id="earned_credit" onClick={ClickHandler}>
-              {props.userInfo.earned_credit ? props.userInfo.earned_credit : "----"}
+            <div
+              className={classes.text_info}
+              id="earned_credit"
+              onClick={ClickHandler}
+            >
+              {props.userInfo.earned_credit
+                ? props.userInfo.earned_credit
+                : "----"}
             </div>
           ) : (
             <form action="#" id="earned_credit" onSubmit={SubmitHandler}>
@@ -177,12 +203,16 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
-      </div>
-      
-      <div className={classes.wrapper_info}>
-        <div className={classes.label_info}>goal_credit</div>
+        </div>
+
+        <div className={classes.wrapper_info}>
+          <div className={classes.label_info}>goal_credit</div>
           {isEditing.goal_credit === false ? (
-            <div className={classes.text_info}  id="goal_credit" onClick={ClickHandler}>
+            <div
+              className={classes.text_info}
+              id="goal_credit"
+              onClick={ClickHandler}
+            >
               {props.userInfo.goal_credit ? props.userInfo.goal_credit : "----"}
             </div>
           ) : (
@@ -195,8 +225,8 @@ const UserInfoForm = (props) => {
               ></input>
             </form>
           )}
+        </div>
       </div>
-    </div>
     </>
   );
 };

@@ -79,9 +79,10 @@ header {
 }
 
 .logo {
-  width: 215px;
-  height: 70px;
+  width: 190px;
+  height: 60px;
   margin-top: 10px;
+  margin-left: 30px;
   background-image: url(../img/logo_knuis_big.png);
   background-size: cover;
 }
@@ -89,7 +90,7 @@ header {
 .nav1 {
   font-weight: bold;
   width: 1000px;
-  margin-left: 100px;
+  margin-left: 150px;
 }
 .nav2 {
   font-weight: bold;
@@ -122,7 +123,7 @@ ul > li:hover > .signUp {
 }
 .home {
   display: flex;
-  padding: 150px;
+  padding: 50px;
 }
 
 .left {

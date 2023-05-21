@@ -43,36 +43,41 @@ const Memo = (props) => {
         <div className={classes.icon_plus}></div>
         <div className={classes.text_plus}>New memo</div>
       </button>
-      {isWriteMode === true ? (
-        <MemoForm
-          onBack={backHandler}
-          memoId={memoId}
-          memoText={
-            memoId !== undefined
-              ? props.memoList.find((obj) => obj.memoId === memoId)?.memoText
-              : ""
-          }
-          onAdd={AddHandler}
-          onFix={FixHandler}
-        ></MemoForm>
-      ) : (
-        <ul>
-          {props.memoList.map((item) => {
-            return (
-              <div className={classes.wrapper_memo}>
-                <p className={classes.text_memo}
-                  id={item.memoId} onClick={modifyHandler} key={item.memoId}>
-                  {item.memoText}
-                </p>
-                <p className={classes.text_date}>
-                  {item.writeDate}
-                </p>
-              </div>
-              
-            );
-          })}
-        </ul>
-      )}
+      <div className={classes.memo_wrapper}>
+        {isWriteMode === true ? (
+          <MemoForm
+            onBack={backHandler}
+            memoId={memoId}
+            memoText={
+              memoId !== undefined
+                ? props.memoList.find((obj) => obj.memoId === memoId)?.memoText
+                : ""
+            }
+            onAdd={AddHandler}
+            onFix={FixHandler}
+          ></MemoForm>
+        ) : (
+          <ul>
+            {props.memoList.map((item) => {
+              return (
+                <div className={classes.wrapper_memo}>
+                  <p className={classes.text_date}>{item.writeDate}</p>
+                  <div className={classes.memo_content}>
+                    <p
+                      className={classes.text_memo}
+                      id={item.memoId}
+                      onClick={modifyHandler}
+                      key={item.memoId}
+                    >
+                      {item.memoText}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </>
   );
 };

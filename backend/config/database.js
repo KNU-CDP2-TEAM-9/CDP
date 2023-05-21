@@ -5,4 +5,5 @@ module.exports = mysql.createPool({
   user: "admin",
   password: "qwer1234",
   database: "cdp",
+  dateStrings: "date",
 });

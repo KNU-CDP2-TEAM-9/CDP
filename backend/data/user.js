@@ -43,6 +43,14 @@
 
 // console.log(str1);
 // console.log(str2);
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth() + 1;
+const date = now.getDate();
+const day = now.getDay();
+const hour = now.getHours();
+const min = now.getMinutes();
+const sec = now.getSeconds();
 
-const a = "sdfasdfd".split("*");
-console.log(a);
+const time = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
+console.log(time);
