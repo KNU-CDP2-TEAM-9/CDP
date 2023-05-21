@@ -50,8 +50,8 @@ router.post("/signup", async (req, res, next) => {
     connection.release();
     const newUserInfo = {
       nickName: data.nickName,
-      firstName: null,
-      lastName: null,
+      firstName: data.firstName,
+      lastName: data.lastName,
       dept: null,
       phoneNumber: null,
       grade: null,
