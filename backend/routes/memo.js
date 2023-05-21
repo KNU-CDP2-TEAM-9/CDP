@@ -15,6 +15,7 @@ router.post("/", async (req, res, next) => {
   const sql = "select * from memo where userId = ?";
   const [result] = await connection.query(sql, [userId]);
   connection.release();
+
   const resList = result.map((item) => {
     return {
       memoId: item.memoId,
@@ -31,7 +32,15 @@ router.post("/item", async (req, res, next) => {
   const data = req.body;
   const token = data.token;
   const userId = decode(token).userId;
-  const writeDate = new Date();
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const date = String(now.getDate()).padStart(2, "0");
+  const hour = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  const sec = String(now.getSeconds()).padStart(2, "0");
+
+  const writeDate = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
   const memoId = generateId();
   const memoInfo = {
     userId: userId,

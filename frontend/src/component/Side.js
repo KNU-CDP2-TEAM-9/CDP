@@ -18,31 +18,41 @@ const Side = (props) => {
   }, []);
 
   const addNewChatting = (item) => {
-    const value = { userId: item.userId, chatId: item.chatId };
+    const value = {
+      userId: item.userId,
+      chatId: item.chatId,
+      addTime: item.addTime,
+    };
     setChatList((prev) => {
       return [...prev, value];
     });
   };
 
   return (
-    <div className={classes.wrapper}>
+    <>
       <AddChat onAdd={addNewChatting}></AddChat>
-      <ul>
-        {chatList.map((item, index) => {
-          return (
-            <li className={classes.item} key={index}>
-              {curLocation !== item.chatId ? (
-                <ChatField chatId={item.chatId} curParam={curParam}></ChatField>
-              ) : (
-                <div className={classes.onclick_chatId}>
-                  <p>{item.chatId}</p>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      <div className={classes.wrapper}>
+        <ul>
+          {chatList.map((item, index) => {
+            return (
+              <li className={classes.item} key={index}>
+                {curLocation !== item.chatId ? (
+                  <ChatField
+                    chatId={item.chatId}
+                    chatTime={item.addTime}
+                    curParam={curParam}
+                  ></ChatField>
+                ) : (
+                  <div className={classes.onclick_chatId}>
+                    <p>{item.addTime}</p>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </>
   );
 };
 

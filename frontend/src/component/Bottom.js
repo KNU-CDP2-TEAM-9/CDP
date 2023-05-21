@@ -44,22 +44,26 @@ const Bottom = (props) => {
   return (
     <>
       <div className={classes.wrapper}>
-        {curParam !== "#userInfo" ? (
-          <Link to="#userInfo" relative="path">
-            <div className={classes.unclick_userInfo}>userInfo</div>
-          </Link>
-        ) : (
-          <div className={classes.onclick_userInfo}>userInfo</div>
-        )}
-        {curParam !== "#memo" ? (
-          <Link to="#memo" relative="path">
-            <div className={classes.unclick_memo}>Memo</div>
-          </Link>
-        ) : (
-          <div className={classes.onclick_memo}>Memo</div>
-        )}
-        <div className={classes.wrapper_logout}>
-          <button className={classes.button_logout} onClick={LogOutHandler}>LogOut</button>
+        <div className={classes.wrapper_top}>
+          {curParam !== "#userInfo" ? (
+            <Link to="#userInfo" relative="path">
+              <div className={classes.unclick_userInfo}>userInfo</div>
+            </Link>
+          ) : (
+            <div className={classes.onclick_userInfo}>userInfo</div>
+          )}
+          {curParam !== "#memo" ? (
+            <Link to="#memo" relative="path">
+              <div className={classes.unclick_memo}>Memo</div>
+            </Link>
+          ) : (
+            <div className={classes.onclick_memo}>Memo</div>
+          )}
+          <div className={classes.wrapper_logout}>
+            <button className={classes.button_logout} onClick={LogOutHandler}>
+              LogOut
+            </button>
+          </div>
         </div>
         {curParam === "#userInfo" && (
           <UserInfoForm

@@ -2,6 +2,7 @@
   width: 100%;
   height: auto;
   display: flex;
+  overflow-y: hidden;
 }
 
 .primary {
@@ -15,11 +16,12 @@
 
 .icon_logo {
   position: fixed;
-  bottom: 15px;
+  top: 0;
   left: 0;
-  width: 168px; 
-  height: 84px;
+  width: 102px;
+  height: 46px;
   background-image: url("../img/logo_knuis.png");
-  background-size: 168px 84px;
-  margin-left: 30px;
+  background-size: 102px 46px;
+  margin-left: 10px;
+  margin-top: 10px;
 }

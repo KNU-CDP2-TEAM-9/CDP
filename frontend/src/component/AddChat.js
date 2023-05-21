@@ -24,7 +24,13 @@ const AddChat = (props) => {
     props.onAdd(resData);
   };
 
-  return <button className={classes.button_newchat} onClick={SubmitHandler}>New Chat</button>;
+  return (
+    <div className={classes.wrapper}>
+      <button className={classes.button_newchat} onClick={SubmitHandler}>
+        New Chat
+      </button>
+    </div>
+  );
 };
 
 export default AddChat;

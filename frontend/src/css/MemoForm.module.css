@@ -1,0 +1,16 @@
+.Text {
+  width: 500px;
+  height: 200px;
+  resize: none;
+}
+
+.Button {
+  padding: 10px;
+  background-color: #ffe78f;
+  color: white;
+  border-radius: 10px;
+}
+
+.Button:hover {
+  color: black;
+}

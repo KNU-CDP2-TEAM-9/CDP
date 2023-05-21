@@ -1,0 +1,11 @@
+.item {
+  padding-left: 30px;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.item:hover {
+  color: #5690ff;
+  text-decoration: none;
+}
