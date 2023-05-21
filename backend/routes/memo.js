@@ -63,16 +63,23 @@ router.patch("/item", async (req, res, next) => {
   const userId = decode(token).userId;
   const memoId = data.memoId;
   const newMemoText = data.memoText;
-  const newWriteDate = new Date();
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const date = String(now.getDate()).padStart(2, "0");
+  const hour = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+  const sec = String(now.getSeconds()).padStart(2, "0");
+  const writeDate = `${year}-${month}-${date} ${hour}:${min}:${sec}`;
   let sql = "update memo set memoText = ? where userId = ? and memoId = ?";
   await connection.query(sql, [newMemoText, userId, memoId]);
   connection.release();
   sql = "update memo set writeDate = ? where userId = ? and memoId = ?";
-  await connection.query(sql, [newWriteDate, userId, memoId]);
+  await connection.query(sql, [writeDate, userId, memoId]);
   connection.release();
   return res
     .status(201)
-    .json({ memoId: memoId, memoText: newMemoText, writeDate: newWriteDate });
+    .json({ memoId: memoId, memoText: newMemoText, writeDate: writeDate });
 });
 
 module.exports = router;
