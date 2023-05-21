@@ -21,21 +21,58 @@ const SignUpForm = () => {
           )}
           <p className={classes.wrapper_input}>
             {/* <label htmlFor="email">Email</label> */}
-            <input className={classes.input_email} 
+            <input
+              className={classes.Input}
               placeholder="email"
-              id="email" type="text" name="email" required />
+              id="email"
+              type="text"
+              name="email"
+              required
+            />
           </p>
           <p className={classes.wrapper_input}>
             {/* <label htmlFor="password">Password</label> */}
-            <input className={classes.input_pw} 
-              placeholder="password" 
-              id="password"type="password" name="password" required />
+            <input
+              className={classes.Input}
+              placeholder="password"
+              id="password"
+              type="password"
+              name="password"
+              required
+            />
           </p>
           <p className={classes.wrapper_input}>
             {/* <label htmlFor="nickName">nickName</label> */}
-            <input className={classes.input_nick} 
-              placeholder="nickName" 
-              id="nickName"type="text" name="nickName" required />
+            <input
+              className={classes.Input}
+              placeholder="nickName"
+              id="nickName"
+              type="text"
+              name="nickName"
+              required
+            />
+          </p>
+          <p className={classes.wrapper_input}>
+            {/* <label htmlFor="nickName">nickName</label> */}
+            <input
+              className={classes.Input}
+              placeholder="firstName"
+              id="firstName"
+              type="text"
+              name="firstName"
+              required
+            />
+          </p>
+          <p className={classes.wrapper_input}>
+            {/* <label htmlFor="nickName">nickName</label> */}
+            <input
+              className={classes.Input}
+              placeholder="lastName"
+              id="lastName"
+              type="text"
+              name="lastName"
+              required
+            />
           </p>
           <div>
             <button className={classes.btn_save} disabled={isSubmitting}>
