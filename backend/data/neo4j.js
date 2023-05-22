@@ -102,16 +102,16 @@ const findResultNode = async (target) => {
   }
 
   async function printQuerySession(target) {
-    let q = "";
+    let q = [];
     const session = driver.session({ database: "neo4j" });
     try {
       // 쿼리
-      const query = `match (n:Node {Name: $target}) return n`;
+      const query = `match (n:Node {Name: $target})-[:question]-(m) return m`;
       const readResult = await session.executeRead((tx) =>
         tx.run(query, { target })
       );
       readResult.records.forEach((record) => {
-        q = record.get("n").properties.Q;
+        q.push(record.get("m").properties.Text);
       });
     } catch (error) {
       console.error(`Something went wrong: ${error}`);

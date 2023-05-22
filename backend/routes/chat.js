@@ -40,7 +40,7 @@ router.post("/msg", async (req, res, next) => {
   let BotText = "";
 
   if (WordList.length === 0) {
-    BotText = "죄송합니다.";
+    BotText = "죄송합니다. 원하시는 정보를 찾을 수 없습니다.";
   } else {
     for (let i = 0; i < WordList.length; i++) {
       for (let j = i + 1; j < WordList.length; j++) {

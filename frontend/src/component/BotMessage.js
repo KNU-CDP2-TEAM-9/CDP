@@ -38,7 +38,7 @@ const BotMessage = (props) => {
   const list1 = (str1 || "").split("*");
   const list2 = (str2 || "").split(">");
   const list3 = (str3 || "").split("|");
-  const list4 = (str4 || "").split("|");
+  const list4 = (str4 || "").split(">");
 
   const path = list1.map((item) => {
     return (
@@ -78,15 +78,9 @@ const BotMessage = (props) => {
   const question =
     list4[0] !== ""
       ? list4.map((item) => {
-          const sp = item.split("*");
           return (
             <>
-              <div>
-                {sp.map((item) => {
-                  return <div onClick={ClickHandler}>{item}</div>;
-                })}
-              </div>
-              <br></br>
+              <div onClick={ClickHandler}>{item}</div>
             </>
           );
         })
