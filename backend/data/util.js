@@ -21,11 +21,14 @@ const MakeSentence = async (list) => {
   const changeList_2 = rList.map((item) => {
     return item.join(">");
   });
+  const changeList_3 = qList.map((item) => {
+    return item.join(">");
+  });
 
   SentenceList.push(changeList_2.join(">"));
-  console.log(qList);
+
   SentenceList.push(tList.join("|"));
-  SentenceList.push(qList.join("|"));
+  SentenceList.push(changeList_3.join(">"));
   // 0 -> path 1 -> rel 2 -> NodeText 3 -> NodeQuery
   const sentence = SentenceList.join(";");
   console.log(sentence);
