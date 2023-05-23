@@ -52,10 +52,7 @@ const Home = () => {
             </div>
             <div className={classes.ButtonArea}>
               <div className={classes.start}>
-                <NavLink
-                  className={classes.navlink}
-                  to={token === null ? "/login?mode=init" : "/main"}
-                >
+                <NavLink className={classes.navlink} to={"/login?mode=init"}>
                   시작하기↗
                 </NavLink>
               </div>

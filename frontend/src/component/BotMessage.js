@@ -35,18 +35,22 @@ const BotMessage = (props) => {
   const str2 = str.split(";")[1];
   const str3 = str.split(";")[2];
   const str4 = str.split(";")[3];
+
   const list1 = (str1 || "").split("*");
   const list2 = (str2 || "").split(">");
   const list3 = (str3 || "").split("|");
   const list4 = (str4 || "").split(">");
 
-  const path = list1.map((item) => {
-    return (
-      <>
-        <div>{item}</div>
-      </>
-    );
-  });
+  const path =
+    list1[0] !== "죄송합니다. 원하시는 정보를 찾을 수 없습니다."
+      ? list1.map((item) => {
+          return (
+            <>
+              <div>{item}</div>
+            </>
+          );
+        })
+      : [];
   const child =
     list2[0] !== ""
       ? list2.map((item) => {
@@ -74,7 +78,7 @@ const BotMessage = (props) => {
           );
         })
       : [];
-  console.log(text);
+
   const question =
     list4[0] !== ""
       ? list4.map((item) => {
@@ -88,7 +92,11 @@ const BotMessage = (props) => {
 
   return (
     <>
-      {path.length !== 0 ? <div>경로입니다.</div> : <div></div>}
+      {path.length !== 0 ? (
+        <div>경로입니다.</div>
+      ) : (
+        <div>죄송합니다. 원하시는 정보를 찾을 수 없습니다.</div>
+      )}
       <div>{path}</div>
       {child.length !== 0 ? <div>추가 정보입니다.</div> : <div></div>}
       <div>{child}</div>
