@@ -1,4 +1,7 @@
 ```
+프로젝트 설명은 '결과보고서' 및 '수행계획서'에 있습니다.
+```
+```
 주제 : 도메인 특화 Knowledge Graph 구축 및 활용 기술 개발
 
 팀원:
@@ -28,4 +31,7 @@ frontend
 
 npm install
 npm install react-router-dom
+```
+```
+현재 db 삭제 .. aws 요금이 나가서..
 ```
