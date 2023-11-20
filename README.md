@@ -32,8 +32,3 @@ frontend
 npm install
 npm install react-router-dom
 ```
-```
-현재 db 삭제 .. aws 요금이 나가서..
-db 삭제로 프로젝트가 동작하지 않을 것입니다.
-db 설정은 config/database.js 에서 하시면 됩니다.
-```
